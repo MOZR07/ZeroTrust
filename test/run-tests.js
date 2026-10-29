@@ -13,6 +13,17 @@ const TRANSKRIP_URL = `http://localhost:${process.env.PORT_TRANSKRIP || 3002}`;
 let servers = [];
 
 async function startServers() {
+    // Check if servers already running (e.g. background node index.js)
+    try {
+        const ping = await fetch(`http://localhost:${process.env.PORT_GATEWAY || 3000}/health`);
+        if (ping.ok) {
+            console.log('[TEST] Servers already active on ports 3000, 3001, 3002. Reusing active servers.');
+            return;
+        }
+    } catch (e) {
+        // Servers not running, launch them
+    }
+
     return new Promise((resolve) => {
         const s1 = nilai.listen(process.env.PORT_NILAI || 3001);
         const s2 = transkrip.listen(process.env.PORT_TRANSKRIP || 3002);

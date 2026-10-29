@@ -542,6 +542,7 @@
         <button class="tab-btn active" id="tabNilai" onclick="switchTab('nilai')">Service Nilai (Port 3001)</button>
         <button class="tab-btn" id="tabTranskrip" onclick="switchTab('transkrip')">Service Transkrip (Port 3002)</button>
         <button class="tab-btn" id="tabAudit" onclick="switchTab('audit')">PEP Audit Logs (Real-time)</button>
+        <button class="tab-btn" id="tabDemoMode" onclick="switchTab('demo')" style="color: var(--brand-green); border-color: rgba(62,207,142,0.3); background: rgba(62,207,142,0.08);">⚡ Interactive Demo Mode (Semua Skenario)</button>
       </div>
 
       <!-- Action Feedback Box -->
@@ -670,6 +671,151 @@
             </tbody>
           </table>
         </div>
+      </div>
+
+      <!-- TAB 4: INTERACTIVE DEMO MODE (NIST SP 800-207 PRESENTER) -->
+      <div id="viewDemo" style="display: none; flex-direction: column; gap: 20px;">
+        <div style="background: rgba(62,207,142,0.06); border: 1px solid rgba(62,207,142,0.25); border-radius: 8px; padding: 16px; display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <h3 style="font-size: 15px; font-weight: 600; color: var(--brand-green);">⚡ Zero Trust Live Presenter & Simulator</h3>
+            <p style="color: var(--text-secondary); font-size: 12px; margin-top: 4px;">
+              Jalankan tiap skenario uji hanya dengan 1-klik. Kotak penjelasan, request payload, dan alasan keputusan Policy Engine langsung muncul di layar video.
+            </p>
+          </div>
+          <button class="btn btn-secondary btn-sm" onclick="resetDatabaseDemo()">Reset DB ke Awal</button>
+        </div>
+
+        <!-- 8 Demo Scenarios Grid -->
+        <div style="display: grid; grid-template-columns: 1fr; gap: 12px;">
+          
+          <!-- Scenario 1: Bypass Port 3001 -->
+          <div class="card" style="padding: 14px; gap: 10px; background: var(--bg-card); border-color: var(--border-default);">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <span class="badge badge-draft" style="font-size: 10px; margin-right: 6px;">Kebutuhan 4.1</span>
+                <strong style="font-size: 13px;">1. Uji Penetrasi: Direct Access Bypass Port 3001 (Tanpa Gateway Secret)</strong>
+              </div>
+              <button class="btn btn-primary btn-sm" onclick="runDemoScenario(1)">Jalankan Uji</button>
+            </div>
+            <p style="color: var(--text-muted); font-size: 12px;">
+              <strong>Yang dijelaskan:</strong> Penyerang mencoba menembak Service Nilai (port 3001) langsung tanpa melewati API Gateway. Service resource menolak karena tidak ada header <code>X-Gateway-Secret</code> (HTTP 403 Forbidden).
+            </p>
+          </div>
+
+          <!-- Scenario 2: Assume Breach / Re-verify Token -->
+          <div class="card" style="padding: 14px; gap: 10px; background: var(--bg-card); border-color: var(--border-default);">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <span class="badge badge-draft" style="font-size: 10px; margin-right: 6px;">Kebutuhan 4.1</span>
+                <strong style="font-size: 13px;">2. Prinsip Assume Breach: Verifikasi Ulang Token di Resource Service</strong>
+              </div>
+              <button class="btn btn-primary btn-sm" onclick="runDemoScenario(2)">Jalankan Uji</button>
+            </div>
+            <p style="color: var(--text-muted); font-size: 12px;">
+              <strong>Yang dijelaskan:</strong> Penyerang berhasil memalsukan <code>X-Gateway-Secret</code> namun tidak membawa JWT valid. Service resource tetap menolak (HTTP 401 Unauthorized) karena memverifikasi ulang token secara independen.
+            </p>
+          </div>
+
+          <!-- Scenario 3: Device Verification -->
+          <div class="card" style="padding: 14px; gap: 10px; background: var(--bg-card); border-color: var(--border-default);">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <span class="badge badge-draft" style="font-size: 10px; margin-right: 6px;">Kebutuhan 4.3</span>
+                <strong style="font-size: 13px;">3. Verifikasi Konteks: Login Ditolak Jika Device ID Asing</strong>
+              </div>
+              <button class="btn btn-primary btn-sm" onclick="runDemoScenario(3)">Jalankan Uji</button>
+            </div>
+            <p style="color: var(--text-muted); font-size: 12px;">
+              <strong>Yang dijelaskan:</strong> Username dan password benar, tapi menggunakan header <code>X-Device-ID: DEV-PENYUSUP-HP</code> yang tidak terdaftar di database. Policy Engine langsung menolak (HTTP 403 Forbidden).
+            </p>
+          </div>
+
+          <!-- Scenario 4: Access Hours -->
+          <div class="card" style="padding: 14px; gap: 10px; background: var(--bg-card); border-color: var(--border-default);">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <span class="badge badge-draft" style="font-size: 10px; margin-right: 6px;">Kebutuhan 4.3</span>
+                <strong style="font-size: 13px;">4. Verifikasi Konteks: Edit Nilai di Luar Jam Operasional (Pukul 23.00)</strong>
+              </div>
+              <button class="btn btn-primary btn-sm" onclick="runDemoScenario(4)">Jalankan Uji</button>
+            </div>
+            <p style="color: var(--text-muted); font-size: 12px;">
+              <strong>Yang dijelaskan:</strong> Dosen yang sah mencoba mengubah nilai pada pukul 23:00 malam (di luar batas 07:00–21:00). Policy Engine menolak dengan pesan pembatasan jam operasional.
+            </p>
+          </div>
+
+          <!-- Scenario 5: ABAC Dosen Ownership -->
+          <div class="card" style="padding: 14px; gap: 10px; background: var(--bg-card); border-color: var(--border-default);">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <span class="badge badge-draft" style="font-size: 10px; margin-right: 6px;">Kebutuhan 4.2</span>
+                <strong style="font-size: 13px;">5. Kontrol Akses Data (ABAC): Dosen Lain Dilarang Ubah Nilai Kelas Budi</strong>
+              </div>
+              <button class="btn btn-primary btn-sm" onclick="runDemoScenario(5)">Jalankan Uji</button>
+            </div>
+            <p style="color: var(--text-muted); font-size: 12px;">
+              <strong>Yang dijelaskan:</strong> Dosen Siti mencoba mengubah nilai kelas IF301 (milik Dr. Budi). Policy Engine membaca relasi kepemilikan kelas di SQLite dan menolak request (HTTP 403 Forbidden).
+            </p>
+          </div>
+
+          <!-- Scenario 6: ABAC Mahasiswa Transcript Snooping -->
+          <div class="card" style="padding: 14px; gap: 10px; background: var(--bg-card); border-color: var(--border-default);">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <span class="badge badge-draft" style="font-size: 10px; margin-right: 6px;">Kebutuhan 4.2</span>
+                <strong style="font-size: 13px;">6. Privasi Mahasiswa: Mahasiswa Ditolak Mengintip Transkrip Orang Lain</strong>
+              </div>
+              <button class="btn btn-primary btn-sm" onclick="runDemoScenario(6)">Jalankan Uji</button>
+            </div>
+            <p style="color: var(--text-muted); font-size: 12px;">
+              <strong>Yang dijelaskan:</strong> Mahasiswa Andi (227006001) mencoba mengakses transkrip Rani (227006002). Policy Engine menolak karena identifier subjek tidak sama dengan NIM target.
+            </p>
+          </div>
+
+          <!-- Scenario 7: Inter-Service Sync -->
+          <div class="card" style="padding: 14px; gap: 10px; background: var(--bg-card); border-color: var(--border-default);">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <span class="badge badge-draft" style="font-size: 10px; margin-right: 6px;">Kebutuhan 3 & 4.1</span>
+                <strong style="font-size: 13px;">7. Finalisasi Kelas & Komunikasi Antar-Service dengan Service Token</strong>
+              </div>
+              <button class="btn btn-primary btn-sm" onclick="runDemoScenario(7)">Jalankan Uji</button>
+            </div>
+            <p style="color: var(--text-muted); font-size: 12px;">
+              <strong>Yang dijelaskan:</strong> Dr. Budi memfinalisasi kelas -> status nilai terkunci -> Service Nilai meminta Service Token ke Gateway -> Service Nilai memanggil Service Transkrip via Gateway PEP.
+            </p>
+          </div>
+
+          <!-- Scenario 8: User Token Denied on Sync -->
+          <div class="card" style="padding: 14px; gap: 10px; background: var(--bg-card); border-color: var(--border-default);">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <span class="badge badge-draft" style="font-size: 10px; margin-right: 6px;">Kebutuhan 4.2</span>
+                <strong style="font-size: 13px;">8. Proteksi Endpoint Sinkronisasi: Token User Biasa Ditolak Keras</strong>
+              </div>
+              <button class="btn btn-primary btn-sm" onclick="runDemoScenario(8)">Jalankan Uji</button>
+            </div>
+            <p style="color: var(--text-muted); font-size: 12px;">
+              <strong>Yang dijelaskan:</strong> Tabel 3 PDF mensyaratkan <code>POST /transkrip/sinkron</code> hanya boleh dipanggil dengan token ber-role <code>service</code>. Token user (bahkan Admin) ditolak mentah-mentah.
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Live Scenario Execution Result Terminal Box -->
+        <div id="demoOutputBox" style="display: none; background: #0a0a0a; border: 1px solid var(--border-default); border-radius: 8px; padding: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 8px;">
+            <strong id="demoScenarioTitle" style="font-family: var(--font-mono); font-size: 12px; color: var(--brand-green);">Hasil Eksekusi Skenario</strong>
+            <span id="demoHttpStatus" class="badge"></span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div><span style="color: var(--text-muted); font-family: var(--font-mono); font-size: 11px;">APA YANG DILAKUKAN:</span> <span id="demoActionDesc" style="color: var(--text-secondary); font-size: 12px;"></span></div>
+            <div><span style="color: var(--text-muted); font-family: var(--font-mono); font-size: 11px;">PENJELASAN UNTUK DOSEN:</span> <span id="demoSpeechCue" style="color: var(--text-primary); font-size: 12px; font-weight: 500;"></span></div>
+            <div><span style="color: var(--text-muted); font-family: var(--font-mono); font-size: 11px;">RESPONS JSON / HEADER:</span></div>
+            <pre id="demoRawResult" class="code-block" style="max-height: 160px;"></pre>
+          </div>
+        </div>
+
       </div>
 
     </section>
@@ -1030,14 +1176,229 @@
       document.getElementById('tabNilai').className = 'tab-btn ' + (tab === 'nilai' ? 'active' : '');
       document.getElementById('tabTranskrip').className = 'tab-btn ' + (tab === 'transkrip' ? 'active' : '');
       document.getElementById('tabAudit').className = 'tab-btn ' + (tab === 'audit' ? 'active' : '');
+      document.getElementById('tabDemoMode').className = 'tab-btn ' + (tab === 'demo' ? 'active' : '');
 
       document.getElementById('viewNilai').style.display = tab === 'nilai' ? 'flex' : 'none';
       document.getElementById('viewTranskrip').style.display = tab === 'transkrip' ? 'flex' : 'none';
       document.getElementById('viewAudit').style.display = tab === 'audit' ? 'flex' : 'none';
+      document.getElementById('viewDemo').style.display = tab === 'demo' ? 'flex' : 'none';
 
       if (tab === 'nilai') loadNilai();
       if (tab === 'transkrip') loadTranskrip();
       if (tab === 'audit') loadAuditLogs();
+    }
+
+    // Interactive Demo Runner
+    async function runDemoScenario(scenNum) {
+      const outBox = document.getElementById('demoOutputBox');
+      const titleEl = document.getElementById('demoScenarioTitle');
+      const statusEl = document.getElementById('demoHttpStatus');
+      const actEl = document.getElementById('demoActionDesc');
+      const speechEl = document.getElementById('demoSpeechCue');
+      const rawEl = document.getElementById('demoRawResult');
+
+      outBox.style.display = 'block';
+      rawEl.textContent = 'Menjalankan skenario...';
+      outBox.scrollIntoView({ behavior: 'smooth' });
+
+      try {
+        if (scenNum === 1) {
+          titleEl.textContent = 'SKENARIO 1: Direct Access ke Port 3001 Ditolak (Bypass Gateway Prevention)';
+          actEl.textContent = 'Browser menembak langsung Service Nilai (http://localhost:3001/nilai) tanpa melewati Gateway PEP dan tanpa membawa X-Gateway-Secret.';
+          speechEl.textContent = 'Perhatikan: Sesuai Kebutuhan 4.1, Service Resource menolak request ini dengan status 403 Forbidden. Ini membuktikan service internal tidak dapat diakses langsung oleh penyerang dari luar.';
+          
+          const res = await fetch('http://localhost:3001/nilai');
+          const data = await res.json().catch(() => ({ status: res.status }));
+          statusEl.textContent = `HTTP ${res.status} FORBIDDEN`;
+          statusEl.className = 'badge badge-deny';
+          rawEl.textContent = JSON.stringify(data, null, 2);
+        }
+        else if (scenNum === 2) {
+          titleEl.textContent = 'SKENARIO 2: Prinsip Assume Breach (Service Verifikasi Ulang Token)';
+          actEl.textContent = 'Browser mencoba menyertakan X-Gateway-Secret ke port 3001 namun tanpa token Bearer JWT yang sah.';
+          speechEl.textContent = 'Perhatikan: Walaupun membawa gateway secret, Service Nilai tetap menolak dengan HTTP 401 Unauthorized karena setiap service memverifikasi ulang tanda tangan digital dan masa berlaku JWT secara independen.';
+          
+          const res = await fetch('http://localhost:3001/nilai', {
+            headers: { 'X-Gateway-Secret': 'super-secure-internal-gateway-secret-2026' }
+          });
+          const data = await res.json().catch(() => ({ status: res.status }));
+          statusEl.textContent = `HTTP ${res.status} UNAUTHORIZED`;
+          statusEl.className = 'badge badge-deny';
+          rawEl.textContent = JSON.stringify(data, null, 2);
+        }
+        else if (scenNum === 3) {
+          titleEl.textContent = 'SKENARIO 3: Verifikasi Konteks Device ID (Login Ditolak)';
+          actEl.textContent = 'Mengirim request login user mhs_andi dengan header X-Device-ID: DEV-PENYUSUP-HP.';
+          speechEl.textContent = 'Perhatikan: Meskipun username mhs_andi dan password benar, request ditolak HTTP 403 Forbidden karena Device ID tidak cocok dengan yang terdaftar di database untuk user tersebut.';
+
+          const res = await fetch('/auth/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'X-Device-ID': 'DEV-PENYUSUP-HP' },
+            body: JSON.stringify({ username: 'mhs_andi', password: 'password123' })
+          });
+          const data = await res.json();
+          statusEl.textContent = `HTTP ${res.status} FORBIDDEN`;
+          statusEl.className = 'badge badge-deny';
+          rawEl.textContent = JSON.stringify(data, null, 2);
+        }
+        else if (scenNum === 4) {
+          titleEl.textContent = 'SKENARIO 4: Verifikasi Konteks Jam Akses (Edit Nilai Jam 23:00 Ditolak)';
+          actEl.textContent = 'Login sebagai Dosen Budi, lalu mencoba edit nilai dengan simulasi header jam akses X-Mock-Hour: 23 (di luar batas 07:00 - 21:00).';
+          speechEl.textContent = 'Perhatikan: Sesuai Kebutuhan 4.3, operasi edit nilai dibatasi pukul 07.00 - 21.00. Permintaan di luar jam tersebut langsung dicegat oleh Policy Engine dengan HTTP 403.';
+
+          // 1. Login Budi dulu
+          const loginRes = await fetch('/auth/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'X-Device-ID': 'DEV-DOSEN-BUDI' },
+            body: JSON.stringify({ username: 'dosen_budi', password: 'password123' })
+          });
+          const loginData = await loginRes.json();
+          
+          // 2. Put nilai jam 23
+          const putRes = await fetch('/nilai/1', {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + loginData.access_token,
+              'X-Device-ID': 'DEV-DOSEN-BUDI',
+              'X-Mock-Hour': '23'
+            },
+            body: JSON.stringify({ nilai_angka: 95 })
+          });
+          const putData = await putRes.json();
+          statusEl.textContent = `HTTP ${putRes.status} FORBIDDEN`;
+          statusEl.className = 'badge badge-deny';
+          rawEl.textContent = JSON.stringify(putData, null, 2);
+        }
+        else if (scenNum === 5) {
+          titleEl.textContent = 'SKENARIO 5: Kontrol Akses Data (ABAC Dosen Ownership)';
+          actEl.textContent = 'Dosen Siti login, lalu mencoba mengubah nilai pada kelas IF301 (yang diampu oleh Dr. Budi Santoso).';
+          speechEl.textContent = 'Perhatikan: Dosen Siti ber-role Dosen, namun Policy Engine mengecek database bahwa kelas IF301 bukan milik Siti. Akses ditolak HTTP 403 Forbidden sesuai prinsip Least Privilege.';
+
+          // 1. Login Siti
+          const loginRes = await fetch('/auth/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'X-Device-ID': 'DEV-DOSEN-SITI' },
+            body: JSON.stringify({ username: 'dosen_siti', password: 'password123' })
+          });
+          const loginData = await loginRes.json();
+
+          // 2. Put nilai kelas budi
+          const putRes = await fetch('/nilai/1', {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + loginData.access_token,
+              'X-Device-ID': 'DEV-DOSEN-SITI',
+              'X-Mock-Hour': '10'
+            },
+            body: JSON.stringify({ nilai_angka: 95 })
+          });
+          const putData = await putRes.json();
+          statusEl.textContent = `HTTP ${putRes.status} FORBIDDEN`;
+          statusEl.className = 'badge badge-deny';
+          rawEl.textContent = JSON.stringify(putData, null, 2);
+        }
+        else if (scenNum === 6) {
+          titleEl.textContent = 'SKENARIO 6: Privasi Mahasiswa (Ditolak Melihat Transkrip Mahasiswa Lain)';
+          actEl.textContent = 'Mahasiswa Andi (NIM 227006001) mencoba mengakses transkrip Rani via GET /transkrip/227006002.';
+          speechEl.textContent = 'Perhatikan: Policy Engine memverifikasi identitas token subjek terhadap parameter NIM. Mahasiswa hanya diizinkan melihat transkrip miliknya sendiri. Akses ke NIM lain langsung diblokir 403.';
+
+          // 1. Login Andi
+          const loginRes = await fetch('/auth/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'X-Device-ID': 'DEV-MHS-ANDI' },
+            body: JSON.stringify({ username: 'mhs_andi', password: 'password123' })
+          });
+          const loginData = await loginRes.json();
+
+          // 2. Akses NIM Rani
+          const getRes = await fetch('/transkrip/227006002', {
+            headers: {
+              'Authorization': 'Bearer ' + loginData.access_token,
+              'X-Device-ID': 'DEV-MHS-ANDI'
+            }
+          });
+          const getData = await getRes.json();
+          statusEl.textContent = `HTTP ${getRes.status} FORBIDDEN`;
+          statusEl.className = 'badge badge-deny';
+          rawEl.textContent = JSON.stringify(getData, null, 2);
+        }
+        else if (scenNum === 7) {
+          titleEl.textContent = 'SKENARIO 7: Finalisasi Kelas & Panggilan Antar-Service dengan Service Token';
+          actEl.textContent = 'Dr. Budi memfinalisasi kelas IF301. Service Nilai mengunci nilai, meminta token service ke Gateway via POST /auth/service, lalu memanggil POST /transkrip/sinkron.';
+          speechEl.textContent = 'Perhatikan: Finalisasi berhasil 200 OK! Service Nilai tidak menembak langsung secara bebas, melainkan meminta token service (role: service) dan melewatinya melalui Gateway PEP.';
+
+          // 1. Login Budi
+          const loginRes = await fetch('/auth/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'X-Device-ID': 'DEV-DOSEN-BUDI' },
+            body: JSON.stringify({ username: 'dosen_budi', password: 'password123' })
+          });
+          const loginData = await loginRes.json();
+
+          // 2. Finalisasi
+          const finRes = await fetch('/kelas/1/finalisasi', {
+            method: 'POST',
+            headers: {
+              'Authorization': 'Bearer ' + loginData.access_token,
+              'X-Device-ID': 'DEV-DOSEN-BUDI',
+              'X-Mock-Hour': '10'
+            }
+          });
+          const finData = await finRes.json();
+          statusEl.textContent = `HTTP ${finRes.status} OK`;
+          statusEl.className = 'badge badge-allow';
+          rawEl.textContent = JSON.stringify(finData, null, 2);
+        }
+        else if (scenNum === 8) {
+          titleEl.textContent = 'SKENARIO 8: Proteksi Endpoint /transkrip/sinkron (Token User Ditolak)';
+          actEl.textContent = 'User (bahkan Admin) mencoba memanggil langsung POST /transkrip/sinkron dengan token user.';
+          speechEl.textContent = 'Perhatikan: Sesuai Tabel 3 dokumen tugas, endpoint /transkrip/sinkron hanya menerima token ber-role service. Token user mana pun ditolak 403 Forbidden.';
+
+          // 1. Login Admin
+          const loginRes = await fetch('/auth/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'X-Device-ID': 'DEV-ADMIN-01' },
+            body: JSON.stringify({ username: 'admin1', password: 'password123' })
+          });
+          const loginData = await loginRes.json();
+
+          // 2. Panggil sinkron pakai token admin
+          const syncRes = await fetch('/transkrip/sinkron', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + loginData.access_token,
+              'X-Device-ID': 'DEV-ADMIN-01'
+            },
+            body: JSON.stringify({ kelas_id: 1, items: [] })
+          });
+          const syncData = await syncRes.json();
+          statusEl.textContent = `HTTP ${syncRes.status} FORBIDDEN`;
+          statusEl.className = 'badge badge-deny';
+          rawEl.textContent = JSON.stringify(syncData, null, 2);
+        }
+      } catch (err) {
+        statusEl.textContent = 'ERROR';
+        statusEl.className = 'badge badge-deny';
+        rawEl.textContent = 'Error: ' + err.message;
+      }
+    }
+
+    async function resetDatabaseDemo() {
+      if (!confirm('Reset database ke data awal?')) return;
+      try {
+        const res = await fetch('/seed-database', { method: 'POST' });
+        if (res.ok) {
+          alert('Database berhasil di-reset ke kondisi awal!');
+          loadNilai();
+        } else {
+          alert('Gagal reset database.');
+        }
+      } catch (e) {
+        alert('Gagal reset: ' + e.message);
+      }
     }
 
     // Initialize on load

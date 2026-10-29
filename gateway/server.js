@@ -5,6 +5,7 @@ const { createProxyMiddleware, fixRequestBody } = require('http-proxy-middleware
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 
 const db = require('../database/db');
+const seedDatabase = require('../database/seed');
 const { logAudit } = require('./audit');
 const {
     generateAccessToken,
@@ -338,6 +339,19 @@ app.get('/audit-logs', (req, res) => {
 
     const logs = db.prepare('SELECT * FROM audit_logs ORDER BY id DESC LIMIT 50').all();
     return res.json({ total: logs.length, logs });
+});
+
+/**
+ * POST /seed-database
+ * Helper endpoint for interactive demo reset
+ */
+app.post('/seed-database', (req, res) => {
+    try {
+        seedDatabase();
+        return res.json({ message: 'Database reset and seeded successfully' });
+    } catch (e) {
+        return res.status(500).json({ error: e.message });
+    }
 });
 
 // Serve static frontend assets from public/
