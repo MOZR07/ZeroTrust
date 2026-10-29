@@ -1,0 +1,9 @@
+node_modules/
+.env
+database/zerotrust.db
+database/zerotrust.db-journal
+database/zerotrust.db-wal
+database/zerotrust.db-shm
+logs/
+audit.log
+*.tmp
