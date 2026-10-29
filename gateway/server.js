@@ -340,13 +340,16 @@ app.get('/audit-logs', (req, res) => {
     return res.json({ total: logs.length, logs });
 });
 
+// Serve static frontend assets from public/
+app.use(express.static(path.resolve(__dirname, '../public')));
+
 // ----------------------------------------------------
 // 2. Policy Enforcement Point (PEP) Middleware
 // ----------------------------------------------------
 
 app.use((req, res, next) => {
-    // Skip if root health check
-    if (req.path === '/' || req.path === '/health') {
+    // Health check endpoint
+    if (req.path === '/health') {
         return res.json({ status: 'API Gateway PEP running on port ' + PORT });
     }
 
