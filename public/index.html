@@ -45,6 +45,70 @@
       flex-direction: column;
     }
 
+    /* Modern minimalist refresh */
+    :root {
+      --bg-base: #090d16;
+      --bg-surface: #101725;
+      --bg-card: #131d2d;
+      --bg-input: #0b1220;
+      --border-subtle: #1c293b;
+      --border-default: #26364d;
+      --border-prominent: #354a65;
+      --text-primary: #edf3fb;
+      --text-secondary: #b4c1d2;
+      --text-muted: #8291a5;
+      --brand-green: #64e2b2;
+      --brand-green-glow: rgba(100, 226, 178, 0.16);
+      --danger: #ff7885;
+      --danger-glow: rgba(255, 120, 133, 0.16);
+      --warning: #ffc66d;
+    }
+
+    body {
+      background:
+        radial-gradient(ellipse at 12% 0%, rgba(54, 104, 170, .14), transparent 38%),
+        var(--bg-base);
+      letter-spacing: .005em;
+    }
+
+    header {
+      background: rgba(16, 23, 37, .88);
+      backdrop-filter: blur(16px);
+      border-bottom-color: rgba(83, 108, 143, .25);
+      padding: 14px clamp(16px, 3vw, 40px);
+    }
+
+    .container {
+      max-width: 1480px;
+      padding: clamp(16px, 2.4vw, 32px);
+      gap: 20px;
+    }
+
+    .card {
+      background: linear-gradient(155deg, rgba(20, 31, 48, .98), rgba(14, 22, 35, .98));
+      border-color: rgba(91, 119, 157, .24);
+      border-radius: 16px;
+      box-shadow: 0 14px 34px rgba(0, 0, 0, .16);
+    }
+
+    .btn { font-weight: 600; }
+    .btn-primary { box-shadow: 0 5px 16px rgba(100, 226, 178, .12); }
+    .btn-primary:hover { transform: translateY(-1px); }
+    .tab-btn { font-family: var(--font-sans); font-weight: 600; }
+    .tab-btn.active { background: rgba(100, 226, 178, .09); border-color: rgba(100, 226, 178, .3); color: var(--brand-green); }
+    input, select { border-radius: 9px; }
+    .table-container { border-radius: 12px; }
+
+    @media (max-width: 960px) {
+      .container { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 680px) {
+      header { align-items: flex-start; gap: 12px; flex-wrap: wrap; }
+      .tabs-header { overflow-x: auto; flex-wrap: nowrap; }
+      .tab-btn { white-space: nowrap; }
+      .presets-grid { grid-template-columns: 1fr 1fr; }
+    }
+
     /* Navbar */
     header {
       background: var(--bg-surface);
@@ -436,6 +500,13 @@
       </div>
     </div>
 
+    <!-- Micro Architecture Indicator -->
+    <div style="display: flex; gap: 14px; align-items: center; font-size: 11px; font-family: var(--font-mono); color: var(--text-muted);">
+      <span style="display: flex; align-items: center; gap: 4px;"><span style="color: var(--brand-green);">●</span> Gateway PEP :3000</span>
+      <span style="display: flex; align-items: center; gap: 4px;"><span style="color: var(--brand-green);">●</span> Nilai :3001</span>
+      <span style="display: flex; align-items: center; gap: 4px;"><span style="color: var(--brand-green);">●</span> Transkrip :3002</span>
+    </div>
+
     <div class="user-status">
       <span class="status-dot" id="statusDot"></span>
       <span id="sessionLabel" style="color: var(--text-secondary);">Belum Login</span>
@@ -452,31 +523,31 @@
       <!-- Quick Fill Preset Accounts -->
       <section class="card">
         <div class="card-title">
-          <span>Preset Akun Uji</span>
-          <span style="font-size: 10px; color: var(--text-muted);">Klik isi form</span>
+          <span>Preset Persona Uji</span>
+          <span style="font-size: 10px; color: var(--brand-green);">⚡ 1-Click Login</span>
         </div>
         <div class="presets-grid">
-          <button class="preset-btn" onclick="fillPreset('mhs_andi', 'DEV-MHS-ANDI')">
+          <button class="preset-btn" onclick="quickLogin('mhs_andi', 'DEV-MHS-ANDI')">
             <div class="preset-name">Andi</div>
             <div class="preset-role">mahasiswa</div>
             <div class="preset-dev">DEV-MHS-ANDI</div>
           </button>
-          <button class="preset-btn" onclick="fillPreset('mhs_rani', 'DEV-MHS-RANI')">
+          <button class="preset-btn" onclick="quickLogin('mhs_rani', 'DEV-MHS-RANI')">
             <div class="preset-name">Rani</div>
             <div class="preset-role">mahasiswa</div>
             <div class="preset-dev">DEV-MHS-RANI</div>
           </button>
-          <button class="preset-btn" onclick="fillPreset('dosen_budi', 'DEV-DOSEN-BUDI')">
+          <button class="preset-btn" onclick="quickLogin('dosen_budi', 'DEV-DOSEN-BUDI')">
             <div class="preset-name">Dr. Budi</div>
             <div class="preset-role">dosen (IF301)</div>
             <div class="preset-dev">DEV-DOSEN-BUDI</div>
           </button>
-          <button class="preset-btn" onclick="fillPreset('dosen_siti', 'DEV-DOSEN-SITI')">
+          <button class="preset-btn" onclick="quickLogin('dosen_siti', 'DEV-DOSEN-SITI')">
             <div class="preset-name">Siti M.Kom</div>
             <div class="preset-role">dosen (IF302)</div>
             <div class="preset-dev">DEV-DOSEN-SITI</div>
           </button>
-          <button class="preset-btn" onclick="fillPreset('admin1', 'DEV-ADMIN-01')" style="grid-column: span 2;">
+          <button class="preset-btn" onclick="quickLogin('admin1', 'DEV-ADMIN-01')" style="grid-column: span 2;">
             <div class="preset-name">Administrator Sistem</div>
             <div class="preset-role">admin</div>
             <div class="preset-dev">DEV-ADMIN-01</div>
@@ -539,10 +610,10 @@
       
       <!-- Workspace Navigation Tabs -->
       <div class="tabs-header">
-        <button class="tab-btn active" id="tabNilai" onclick="switchTab('nilai')">Service Nilai (Port 3001)</button>
+        <button class="tab-btn active" id="tabDemoMode" onclick="switchTab('demo')" style="color: var(--brand-green); border-color: rgba(62,207,142,0.4); background: rgba(62,207,142,0.1);">⚡ Interactive Demo Mode (Semua Skenario)</button>
+        <button class="tab-btn" id="tabNilai" onclick="switchTab('nilai')">Service Nilai (Port 3001)</button>
         <button class="tab-btn" id="tabTranskrip" onclick="switchTab('transkrip')">Service Transkrip (Port 3002)</button>
         <button class="tab-btn" id="tabAudit" onclick="switchTab('audit')">PEP Audit Logs (Real-time)</button>
-        <button class="tab-btn" id="tabDemoMode" onclick="switchTab('demo')" style="color: var(--brand-green); border-color: rgba(62,207,142,0.3); background: rgba(62,207,142,0.08);">⚡ Interactive Demo Mode (Semua Skenario)</button>
       </div>
 
       <!-- Action Feedback Box -->
@@ -674,146 +745,86 @@
       </div>
 
       <!-- TAB 4: INTERACTIVE DEMO MODE (NIST SP 800-207 PRESENTER) -->
-      <div id="viewDemo" style="display: none; flex-direction: column; gap: 20px;">
-        <div style="background: rgba(62,207,142,0.06); border: 1px solid rgba(62,207,142,0.25); border-radius: 8px; padding: 16px; display: flex; justify-content: space-between; align-items: center;">
-          <div>
-            <h3 style="font-size: 15px; font-weight: 600; color: var(--brand-green);">⚡ Zero Trust Live Presenter & Simulator</h3>
-            <p style="color: var(--text-secondary); font-size: 12px; margin-top: 4px;">
-              Jalankan tiap skenario uji hanya dengan 1-klik. Kotak penjelasan, request payload, dan alasan keputusan Policy Engine langsung muncul di layar video.
-            </p>
-          </div>
-          <button class="btn btn-secondary btn-sm" onclick="resetDatabaseDemo()">Reset DB ke Awal</button>
-        </div>
-
-        <!-- 8 Demo Scenarios Grid -->
-        <div style="display: grid; grid-template-columns: 1fr; gap: 12px;">
+      <div id="viewDemo" style="display: flex; flex-direction: column; gap: 16px;">
+        
+        <!-- Live Presenter Stepper Card -->
+        <div class="card" style="padding: 20px; gap: 16px; border: 1px solid rgba(100, 226, 178, 0.35); background: linear-gradient(175deg, rgba(19, 29, 45, 0.98), rgba(11, 18, 30, 0.98)); box-shadow: 0 12px 32px rgba(0,0,0,0.3);">
           
-          <!-- Scenario 1: Bypass Port 3001 -->
-          <div class="card" style="padding: 14px; gap: 10px; background: var(--bg-card); border-color: var(--border-default);">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <div>
-                <span class="badge badge-draft" style="font-size: 10px; margin-right: 6px;">Kebutuhan 4.1</span>
-                <strong style="font-size: 13px;">1. Uji Penetrasi: Direct Access Bypass Port 3001 (Tanpa Gateway Secret)</strong>
-              </div>
-              <button class="btn btn-primary btn-sm" onclick="runDemoScenario(1)">Jalankan Uji</button>
+          <!-- Presenter Header -->
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; border-bottom: 1px solid rgba(255,255,255,0.07); padding-bottom: 12px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span class="brand-badge" style="background: rgba(100, 226, 178, 0.15); border-color: rgba(100, 226, 178, 0.4); color: var(--brand-green);">⚡ LIVE DEMO CONSOLE</span>
+              <span id="activeReqBadge" class="badge badge-draft" style="font-size: 11px;">Kebutuhan 4.1</span>
             </div>
-            <p style="color: var(--text-muted); font-size: 12px;">
-              <strong>Yang dijelaskan:</strong> Penyerang mencoba menembak Service Nilai (port 3001) langsung tanpa melewati API Gateway. Service resource menolak karena tidak ada header <code>X-Gateway-Secret</code> (HTTP 403 Forbidden).
+            <div style="display: flex; gap: 8px; align-items: center;">
+              <button class="btn btn-secondary btn-sm" onclick="resetDatabaseDemo()" title="Kembalikan database SQLite ke data awal">↺ Reset Database</button>
+              <span id="stepCounterLabel" style="font-size: 12px; font-family: var(--font-mono); color: var(--text-muted);">Skenario 1 / 8</span>
+            </div>
+          </div>
+
+          <!-- Step Pills Navigation -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 6px;" id="demoStepperBar">
+            <button class="tab-btn active" id="stepPill-1" onclick="selectDemoStep(1)" style="font-size: 11px; padding: 6px 8px; text-align: center;">1. Bypass 3001</button>
+            <button class="tab-btn" id="stepPill-2" onclick="selectDemoStep(2)" style="font-size: 11px; padding: 6px 8px; text-align: center;">2. Assume Breach</button>
+            <button class="tab-btn" id="stepPill-3" onclick="selectDemoStep(3)" style="font-size: 11px; padding: 6px 8px; text-align: center;">3. Device ID</button>
+            <button class="tab-btn" id="stepPill-4" onclick="selectDemoStep(4)" style="font-size: 11px; padding: 6px 8px; text-align: center;">4. Jam Akses</button>
+            <button class="tab-btn" id="stepPill-5" onclick="selectDemoStep(5)" style="font-size: 11px; padding: 6px 8px; text-align: center;">5. ABAC Dosen</button>
+            <button class="tab-btn" id="stepPill-6" onclick="selectDemoStep(6)" style="font-size: 11px; padding: 6px 8px; text-align: center;">6. Privasi Mhs</button>
+            <button class="tab-btn" id="stepPill-7" onclick="selectDemoStep(7)" style="font-size: 11px; padding: 6px 8px; text-align: center;">7. Inter-Service</button>
+            <button class="tab-btn" id="stepPill-8" onclick="selectDemoStep(8)" style="font-size: 11px; padding: 6px 8px; text-align: center;">8. Sinkron Protect</button>
+          </div>
+
+          <!-- Title and Description of Active Scenario -->
+          <div>
+            <h3 id="activeTitle" style="font-size: 16px; font-weight: 700; color: #ffffff; letter-spacing: -0.2px;">
+              1. Uji Penetrasi: Direct Access Bypass Port 3001 (Tanpa Gateway Secret)
+            </h3>
+            <p id="activeDesc" style="color: var(--text-secondary); font-size: 12px; margin-top: 3px;">
+              Penyerang mencoba menembak Service Nilai (port 3001) langsung tanpa melewati API Gateway.
             </p>
           </div>
 
-          <!-- Scenario 2: Assume Breach / Re-verify Token -->
-          <div class="card" style="padding: 14px; gap: 10px; background: var(--bg-card); border-color: var(--border-default);">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <div>
-                <span class="badge badge-draft" style="font-size: 10px; margin-right: 6px;">Kebutuhan 4.1</span>
-                <strong style="font-size: 13px;">2. Prinsip Assume Breach: Verifikasi Ulang Token di Resource Service</strong>
-              </div>
-              <button class="btn btn-primary btn-sm" onclick="runDemoScenario(2)">Jalankan Uji</button>
+          <!-- Teleprompter Box for Video Recording -->
+          <div style="background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(100, 226, 178, 0.25); border-left: 4px solid var(--brand-green); border-radius: 8px; padding: 14px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <span style="font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; color: var(--brand-green); font-weight: 600; letter-spacing: 0.5px;">
+                🎙️ NASKAH SUARA UNTUK DOSEN (TINGGAL DIBACA SAAT REKAM):
+              </span>
+              <button class="btn btn-secondary btn-sm" onclick="copySpeechText()" style="padding: 2px 8px; font-size: 10px;">Salin Teks</button>
             </div>
-            <p style="color: var(--text-muted); font-size: 12px;">
-              <strong>Yang dijelaskan:</strong> Penyerang berhasil memalsukan <code>X-Gateway-Secret</code> namun tidak membawa JWT valid. Service resource tetap menolak (HTTP 401 Unauthorized) karena memverifikasi ulang token secara independen.
+            <p id="activeSpeech" style="font-size: 14px; line-height: 1.6; color: #edf3fb; font-weight: 400; margin: 0;">
+              "Pengujian pertama adalah pencegahan bypass langsung ke Service Nilai di port 3001. Penyerang mencoba mengakses resource tanpa melewati Gateway PEP. Seperti yang terlihat pada hasil respon, statusnya HTTP 403 Forbidden karena tidak ada header rahasia X-Gateway-Secret. Hal ini memastikan bahwa seluruh lalu lintas wajib melewati API Gateway."
             </p>
           </div>
 
-          <!-- Scenario 3: Device Verification -->
-          <div class="card" style="padding: 14px; gap: 10px; background: var(--bg-card); border-color: var(--border-default);">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <div>
-                <span class="badge badge-draft" style="font-size: 10px; margin-right: 6px;">Kebutuhan 4.3</span>
-                <strong style="font-size: 13px;">3. Verifikasi Konteks: Login Ditolak Jika Device ID Asing</strong>
-              </div>
-              <button class="btn btn-primary btn-sm" onclick="runDemoScenario(3)">Jalankan Uji</button>
+          <!-- Actions: Run & Next -->
+          <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+            <button class="btn btn-primary" onclick="runActiveScenario()" style="padding: 10px 24px; font-size: 14px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px;">
+              <span>▶</span> Jalankan Uji Skenario Ini
+            </button>
+            <button class="btn btn-secondary" onclick="nextDemoScenario()" style="padding: 10px 18px; font-size: 13px;">
+              Skenario Berikutnya ❯
+            </button>
+          </div>
+
+          <!-- Live Result Terminal Box -->
+          <div id="demoOutputBox" style="display: none; background: #080d15; border: 1px solid var(--border-default); border-radius: 8px; padding: 14px; margin-top: 4px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 6px;">
+              <strong id="demoScenarioTitle" style="font-family: var(--font-mono); font-size: 12px; color: var(--brand-green);">Hasil Respon Policy Engine</strong>
+              <span id="demoHttpStatus" class="badge"></span>
             </div>
-            <p style="color: var(--text-muted); font-size: 12px;">
-              <strong>Yang dijelaskan:</strong> Username dan password benar, tapi menggunakan header <code>X-Device-ID: DEV-PENYUSUP-HP</code> yang tidak terdaftar di database. Policy Engine langsung menolak (HTTP 403 Forbidden).
-            </p>
-          </div>
-
-          <!-- Scenario 4: Access Hours -->
-          <div class="card" style="padding: 14px; gap: 10px; background: var(--bg-card); border-color: var(--border-default);">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; flex-direction: column; gap: 6px;">
               <div>
-                <span class="badge badge-draft" style="font-size: 10px; margin-right: 6px;">Kebutuhan 4.3</span>
-                <strong style="font-size: 13px;">4. Verifikasi Konteks: Edit Nilai di Luar Jam Operasional (Pukul 23.00)</strong>
+                <span style="color: var(--text-muted); font-family: var(--font-mono); font-size: 11px;">EVALUASI POLICY PEP:</span> 
+                <span id="demoActionDesc" style="color: var(--text-primary); font-size: 12px; font-weight: 500;"></span>
               </div>
-              <button class="btn btn-primary btn-sm" onclick="runDemoScenario(4)">Jalankan Uji</button>
-            </div>
-            <p style="color: var(--text-muted); font-size: 12px;">
-              <strong>Yang dijelaskan:</strong> Dosen yang sah mencoba mengubah nilai pada pukul 23:00 malam (di luar batas 07:00–21:00). Policy Engine menolak dengan pesan pembatasan jam operasional.
-            </p>
-          </div>
-
-          <!-- Scenario 5: ABAC Dosen Ownership -->
-          <div class="card" style="padding: 14px; gap: 10px; background: var(--bg-card); border-color: var(--border-default);">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <div>
-                <span class="badge badge-draft" style="font-size: 10px; margin-right: 6px;">Kebutuhan 4.2</span>
-                <strong style="font-size: 13px;">5. Kontrol Akses Data (ABAC): Dosen Lain Dilarang Ubah Nilai Kelas Budi</strong>
+              <div style="margin-top: 4px;">
+                <span style="color: var(--text-muted); font-family: var(--font-mono); font-size: 11px;">RAW RESPONSE JSON:</span>
+                <pre id="demoRawResult" class="code-block" style="max-height: 140px; font-size: 11px; margin-top: 4px;"></pre>
               </div>
-              <button class="btn btn-primary btn-sm" onclick="runDemoScenario(5)">Jalankan Uji</button>
             </div>
-            <p style="color: var(--text-muted); font-size: 12px;">
-              <strong>Yang dijelaskan:</strong> Dosen Siti mencoba mengubah nilai kelas IF301 (milik Dr. Budi). Policy Engine membaca relasi kepemilikan kelas di SQLite dan menolak request (HTTP 403 Forbidden).
-            </p>
           </div>
 
-          <!-- Scenario 6: ABAC Mahasiswa Transcript Snooping -->
-          <div class="card" style="padding: 14px; gap: 10px; background: var(--bg-card); border-color: var(--border-default);">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <div>
-                <span class="badge badge-draft" style="font-size: 10px; margin-right: 6px;">Kebutuhan 4.2</span>
-                <strong style="font-size: 13px;">6. Privasi Mahasiswa: Mahasiswa Ditolak Mengintip Transkrip Orang Lain</strong>
-              </div>
-              <button class="btn btn-primary btn-sm" onclick="runDemoScenario(6)">Jalankan Uji</button>
-            </div>
-            <p style="color: var(--text-muted); font-size: 12px;">
-              <strong>Yang dijelaskan:</strong> Mahasiswa Andi (227006001) mencoba mengakses transkrip Rani (227006002). Policy Engine menolak karena identifier subjek tidak sama dengan NIM target.
-            </p>
-          </div>
-
-          <!-- Scenario 7: Inter-Service Sync -->
-          <div class="card" style="padding: 14px; gap: 10px; background: var(--bg-card); border-color: var(--border-default);">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <div>
-                <span class="badge badge-draft" style="font-size: 10px; margin-right: 6px;">Kebutuhan 3 & 4.1</span>
-                <strong style="font-size: 13px;">7. Finalisasi Kelas & Komunikasi Antar-Service dengan Service Token</strong>
-              </div>
-              <button class="btn btn-primary btn-sm" onclick="runDemoScenario(7)">Jalankan Uji</button>
-            </div>
-            <p style="color: var(--text-muted); font-size: 12px;">
-              <strong>Yang dijelaskan:</strong> Dr. Budi memfinalisasi kelas -> status nilai terkunci -> Service Nilai meminta Service Token ke Gateway -> Service Nilai memanggil Service Transkrip via Gateway PEP.
-            </p>
-          </div>
-
-          <!-- Scenario 8: User Token Denied on Sync -->
-          <div class="card" style="padding: 14px; gap: 10px; background: var(--bg-card); border-color: var(--border-default);">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <div>
-                <span class="badge badge-draft" style="font-size: 10px; margin-right: 6px;">Kebutuhan 4.2</span>
-                <strong style="font-size: 13px;">8. Proteksi Endpoint Sinkronisasi: Token User Biasa Ditolak Keras</strong>
-              </div>
-              <button class="btn btn-primary btn-sm" onclick="runDemoScenario(8)">Jalankan Uji</button>
-            </div>
-            <p style="color: var(--text-muted); font-size: 12px;">
-              <strong>Yang dijelaskan:</strong> Tabel 3 PDF mensyaratkan <code>POST /transkrip/sinkron</code> hanya boleh dipanggil dengan token ber-role <code>service</code>. Token user (bahkan Admin) ditolak mentah-mentah.
-            </p>
-          </div>
-
-        </div>
-
-        <!-- Live Scenario Execution Result Terminal Box -->
-        <div id="demoOutputBox" style="display: none; background: #0a0a0a; border: 1px solid var(--border-default); border-radius: 8px; padding: 16px;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 8px;">
-            <strong id="demoScenarioTitle" style="font-family: var(--font-mono); font-size: 12px; color: var(--brand-green);">Hasil Eksekusi Skenario</strong>
-            <span id="demoHttpStatus" class="badge"></span>
-          </div>
-          <div style="display: flex; flex-direction: column; gap: 8px;">
-            <div><span style="color: var(--text-muted); font-family: var(--font-mono); font-size: 11px;">APA YANG DILAKUKAN:</span> <span id="demoActionDesc" style="color: var(--text-secondary); font-size: 12px;"></span></div>
-            <div><span style="color: var(--text-muted); font-family: var(--font-mono); font-size: 11px;">PENJELASAN UNTUK DOSEN:</span> <span id="demoSpeechCue" style="color: var(--text-primary); font-size: 12px; font-weight: 500;"></span></div>
-            <div><span style="color: var(--text-muted); font-family: var(--font-mono); font-size: 11px;">RESPONS JSON / HEADER:</span></div>
-            <pre id="demoRawResult" class="code-block" style="max-height: 160px;"></pre>
-          </div>
         </div>
 
       </div>
@@ -834,14 +845,22 @@
     function init() {
       if (authState.user && authState.accessToken) {
         setLoggedIn(authState.user, authState.accessToken, authState.refreshToken);
-        loadNilai();
       }
+      switchTab('demo');
+      selectDemoStep(1);
     }
 
     function fillPreset(username, deviceId) {
       document.getElementById('inpUsername').value = username;
       document.getElementById('inpPassword').value = 'password123';
       document.getElementById('inpDevice').value = deviceId;
+    }
+
+    async function quickLogin(username, deviceId) {
+      fillPreset(username, deviceId);
+      const fakeEvent = { preventDefault: () => {} };
+      await handleLogin(fakeEvent);
+      switchTab('nilai');
     }
 
     function setLoggedIn(user, token, refreshToken) {
@@ -1188,13 +1207,115 @@
       if (tab === 'audit') loadAuditLogs();
     }
 
+    // Demo Scenarios Master Data
+    const demoSteps = [
+      {
+        num: 1,
+        req: 'Kebutuhan 4.1',
+        title: '1. Uji Penetrasi: Direct Access Bypass Port 3001 (Tanpa Gateway Secret)',
+        desc: 'Browser menembak langsung Service Nilai (port 3001) tanpa melewati Gateway PEP dan tanpa membawa X-Gateway-Secret.',
+        speech: '"Pengujian pertama adalah pencegahan bypass langsung ke Service Nilai di port 3001. Penyerang mencoba mengakses resource tanpa melewati Gateway PEP. Seperti yang terlihat pada hasil respon, statusnya HTTP 403 Forbidden karena tidak ada header rahasia X-Gateway-Secret. Hal ini memastikan bahwa seluruh lalu lintas wajib melewati API Gateway."'
+      },
+      {
+        num: 2,
+        req: 'Kebutuhan 4.1',
+        title: '2. Prinsip Assume Breach: Verifikasi Ulang Token di Resource Service',
+        desc: 'Browser mencoba mengirim X-Gateway-Secret ke port 3001 tetapi tanpa menyertakan JWT Bearer valid.',
+        speech: '"Pengujian kedua menerapkan prinsip Assume Breach. Jika penyerang berhasil memalsukan X-Gateway-Secret tetapi tidak membawa token JWT yang sah, hasilnya adalah HTTP 401 Unauthorized. Walaupun membawa gateway secret, Service Nilai memverifikasi ulang tanda tangan digital dan masa berlaku JWT secara independen."'
+      },
+      {
+        num: 3,
+        req: 'Kebutuhan 4.3',
+        title: '3. Verifikasi Konteks: Login Ditolak Jika Device ID Asing',
+        desc: 'Login mahasiswa Andi menggunakan header X-Device-ID: DEV-PENYUSUP-HP yang tidak terdaftar.',
+        speech: '"Pengujian ketiga adalah verifikasi konteks perangkat. Pada arsitektur Zero Trust, otentikasi tidak hanya memeriksa username dan password, tetapi juga identitas perangkat. Di sini kita mencoba login sebagai mahasiswa Andi dengan password yang benar, tetapi membawa Device ID asing. Responnya adalah HTTP 403 Forbidden karena perangkat tidak terdaftar di database."'
+      },
+      {
+        num: 4,
+        req: 'Kebutuhan 4.3',
+        title: '4. Verifikasi Konteks: Edit Nilai di Luar Jam Operasional (Pukul 23.00)',
+        desc: 'Dosen Budi mencoba mengubah nilai dengan simulasi jam akses 23:00 (batas operasional 07:00–21:00).',
+        speech: '"Pengujian keempat adalah verifikasi konteks jam operasional. Dokumen praktikum mensyaratkan perubahan nilai hanya boleh dilakukan pada pukul 07.00 sampai 21.00. Pada skenario ini, Dosen Budi mencoba mengubah nilai pada simulasi pukul 23.00 malam. Hasilnya adalah HTTP 403 Forbidden karena dicegat oleh Policy Engine."'
+      },
+      {
+        num: 5,
+        req: 'Kebutuhan 4.2',
+        title: '5. Kontrol Akses Data (ABAC): Dosen Lain Dilarang Ubah Nilai Kelas Budi',
+        desc: 'Dosen Siti mencoba mengubah nilai pada kelas IF301 yang diampu oleh Dr. Budi Santoso.',
+        speech: '"Pengujian kelima adalah kontrol akses berbasis kepemilikan data atau ABAC. Keputusan izin tidak hanya melihat peran dosen di token, melainkan Policy Engine membaca data pengampu di database. Di sini Dosen Siti mencoba mengedit nilai pada kelas IF301 milik Dr. Budi. Responnya adalah HTTP 403 Forbidden karena Siti bukan pengampu kelas tersebut."'
+      },
+      {
+        num: 6,
+        req: 'Kebutuhan 4.2',
+        title: '6. Privasi Mahasiswa: Mahasiswa Ditolak Mengintip Transkrip Orang Lain',
+        desc: 'Mahasiswa Andi (227006001) mencoba mengakses transkrip milik Rani (227006002).',
+        speech: '"Pengujian keenam adalah perlindungan privasi transkrip mahasiswa. Mahasiswa Andi dengan NIM 227006001 mencoba mengintip transkrip milik mahasiswa Rani. Hasilnya adalah HTTP 403 Forbidden. Policy Engine mencocokkan identifier subjek pada token dengan parameter NIM yang diminta, dan langsung memblokir request."'
+      },
+      {
+        num: 7,
+        req: 'Kebutuhan 3 & 4.1',
+        title: '7. Finalisasi Kelas & Komunikasi Antar-Service dengan Service Token',
+        desc: 'Dr. Budi memfinalisasi kelas -> status terkunci -> Service Nilai meminta Service Token 5m -> sinkron ke Service Transkrip.',
+        speech: '"Pengujian ketujuh adalah proses finalisasi nilai dan panggilan antar-service. Saat Dr. Budi memfinalisasi kelas, status nilai dikunci menjadi final. Service Nilai kemudian meminta Token Service khusus ke Gateway melalui POST /auth/service dengan role service dan masa berlaku 5 menit, lalu memanggil Service Transkrip. Hasilnya HTTP 200 OK."'
+      },
+      {
+        num: 8,
+        req: 'Kebutuhan 4.2',
+        title: '8. Proteksi Endpoint Sinkronisasi: Token User Biasa Ditolak Keras',
+        desc: 'Token pengguna (bahkan Admin) ditolak jika memanggil POST /transkrip/sinkron secara langsung.',
+        speech: '"Pengujian kedelapan membuktikan proteksi endpoint sinkronisasi. Sesuai ketentuan Tabel 3 dokumen tugas, endpoint POST /transkrip/sinkron hanya boleh diakses menggunakan token ber-role service. Jika pengguna biasa atau Admin mencoba memanggil endpoint ini, hasilnya adalah HTTP 403 Forbidden demi menjaga integritas data antar-service."'
+      }
+    ];
+
+    let currentDemoStep = 1;
+
+    function selectDemoStep(stepNum) {
+      currentDemoStep = stepNum;
+      for (let i = 1; i <= 8; i++) {
+        const pill = document.getElementById(`stepPill-${i}`);
+        if (pill) {
+          pill.className = 'tab-btn ' + (i === stepNum ? 'active' : '');
+        }
+      }
+      const s = demoSteps[stepNum - 1];
+      document.getElementById('activeReqBadge').textContent = s.req;
+      document.getElementById('activeTitle').textContent = s.title;
+      document.getElementById('activeDesc').textContent = s.desc;
+      document.getElementById('activeSpeech').textContent = s.speech;
+      document.getElementById('stepCounterLabel').textContent = `Skenario ${stepNum} / 8`;
+      document.getElementById('demoOutputBox').style.display = 'none';
+    }
+
+    function nextDemoScenario() {
+      if (currentDemoStep < 8) {
+        selectDemoStep(currentDemoStep + 1);
+      } else {
+        if (confirm('Semua 8 skenario demo telah selesai! Buka tab PEP Audit Logs untuk penutup video?')) {
+          switchTab('audit');
+        }
+      }
+    }
+
+    function runActiveScenario() {
+      runDemoScenario(currentDemoStep);
+    }
+
+    function copySpeechText() {
+      const text = document.getElementById('activeSpeech').textContent;
+      navigator.clipboard.writeText(text);
+      alert('Naskah berhasil disalin ke clipboard!');
+    }
+
     // Interactive Demo Runner
     async function runDemoScenario(scenNum) {
+      if (currentDemoStep !== scenNum) {
+        selectDemoStep(scenNum);
+      }
       const outBox = document.getElementById('demoOutputBox');
       const titleEl = document.getElementById('demoScenarioTitle');
       const statusEl = document.getElementById('demoHttpStatus');
       const actEl = document.getElementById('demoActionDesc');
-      const speechEl = document.getElementById('demoSpeechCue');
+      const speechEl = document.getElementById('activeSpeech');
       const rawEl = document.getElementById('demoRawResult');
 
       outBox.style.display = 'block';
