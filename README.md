@@ -153,7 +153,7 @@ Semua akun menggunakan password default: **`password123`**
 
 ### 4.3 Verifikasi Konteks
 - **Device Terdaftar:** Setiap request user wajib menyertakan header `X-Device-ID`. Jika header hilang atau device tidak terdaftar untuk user tersebut, Policy Engine menolak dengan HTTP 403 Forbidden.
-- **Jam Akses:** Operasi ubah nilai (`PUT /nilai/:id`) dan finalisasi (`POST /kelas/:id/finalisasi`) dibatasi pukul `07.00 - 21.00`. Rentang jam dikonfigurasi melalui `.env` (`ACCESS_HOURS_START`, `ACCESS_HOURS_END`) dan mendukung simulasi header `X-Mock-Hour` untuk pengujian dan demo.
+- **Jam Akses:** Operasi ubah nilai (`PUT /nilai/:id`) dan finalisasi (`POST /kelas/:id/finalisasi`) dibatasi pukul `07.00 - 21.00`. Rentang jam dikonfigurasi melalui `.env` (`ACCESS_HOURS_START`, `ACCESS_HOURS_END`) dan mendukung simulasi header `X-Mock-Hour` untuk pengujian.
 
 ### 4.4 Audit Log
 - Gateway mencatat seluruh keputusan akses (ALLOW maupun DENY) ke:
@@ -165,14 +165,7 @@ Semua akun menggunakan password default: **`password123`**
 
 ---
 
-## 6. Panduan Video Demo
-
-Panduan dan naskah rekaman video demo 100% full web browser (durasi 6–8 menit sesuai luaran praktikum) tersedia lengkap di:
-👉 **[`PANDUAN_DEMO.md`](./PANDUAN_DEMO.md)**
-
----
-
-## 7. Contoh Request cURL untuk Pengujian Manual
+## 6. Contoh Request cURL untuk Pengujian Manual
 
 ### 1. Login Mahasiswa (Mendapatkan Token)
 ```bash
