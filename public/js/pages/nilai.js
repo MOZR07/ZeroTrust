@@ -15,6 +15,22 @@ const NilaiPage = (() => {
       return;
     }
 
+    if (user.role === 'admin') {
+      container.innerHTML = `
+        <div class="card" style="padding: 40px; text-align: center;">
+          <div style="color: var(--danger-text); font-weight: 600; font-size: 15px;">Akses Dibatasi — Prinsip Least Privilege</div>
+          <p style="color: var(--text-secondary); font-size: 12.5px; margin-top: 6px; max-width: 520px; margin-left: auto; margin-right: auto;">
+            Sesuai matriks otorisasi Zero Trust NIST SP 800-207, Administrator tidak memiliki izin mengakses atau mengubah nilai mentah mahasiswa pada Service Nilai (:3001). Silakan buka menu <strong>Inspeksi Transkrip</strong> atau pantau <strong>PEP Audit Logs</strong>.
+          </p>
+          <div style="margin-top: 14px; display: flex; justify-content: center; gap: 8px;">
+            <button class="btn btn-primary btn-sm" onclick="App.navigate('transkrip')">Buka Inspeksi Transkrip</button>
+            <button class="btn btn-secondary btn-sm" onclick="App.navigate('audit')">Buka PEP Audit Logs</button>
+          </div>
+        </div>
+      `;
+      return;
+    }
+
     container.innerHTML = `
       <div class="page-header">
         <div>

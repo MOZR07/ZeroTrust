@@ -18,23 +18,41 @@ const TranskripPage = (() => {
     const isMahasiswa = user.role === 'mahasiswa';
     targetNim = isMahasiswa ? user.identifier : (targetNim || '227006001');
 
+    if (user.role === 'dosen') {
+      container.innerHTML = `
+        <div class="card" style="padding: 40px; text-align: center;">
+          <div style="color: var(--danger-text); font-weight: 600; font-size: 15px;">Akses Dibatasi — Prinsip Least Privilege</div>
+          <p style="color: var(--text-secondary); font-size: 12.5px; margin-top: 6px; max-width: 480px; margin-left: auto; margin-right: auto;">
+            Berdasarkan matriks otorisasi Zero Trust NIST SP 800-207, Dosen tidak diizinkan membaca transkrip kumulatif mahasiswa. Hak akses Dosen dibatasi hanya pada pengelolaan nilai kelas yang diampu.
+          </p>
+        </div>
+      `;
+      return;
+    }
+
     container.innerHTML = `
       <div class="page-header">
         <div>
           <h2 class="page-title">Transkrip Akademik Kumulatif</h2>
           <p class="page-description">
-            ${isMahasiswa ? 'Arsip transkrip resmi hasil sinkronisasi Service Nilai ke Service Transkrip.' : 'Inspeksi transkrip akademik mahasiswa berbasis evaluasi kebijakan PEP.'}
+            ${isMahasiswa ? 'Arsip transkrip resmi mahasiswa. Anda hanya dapat melihat NIM milik sendiri sesuai prinsip Least Privilege.' : 'Inspeksi transkrip akademik mahasiswa berbasis evaluasi kebijakan PEP.'}
           </p>
         </div>
 
-        ${isAdmin ? `
+        <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 6px;">
           <div style="display: flex; gap: 8px; align-items: center;">
-            <input type="text" id="inpAdminTargetNim" class="input" style="width: 160px; font-family: var(--font-mono);" value="${targetNim}" placeholder="Ketik NIM Mahasiswa">
-            <button class="btn btn-primary btn-sm" onclick="TranskripPage.loadByNim(document.getElementById('inpAdminTargetNim').value)">Cari Transkrip</button>
+            <input type="text" id="inpTargetNim" class="input" style="width: 160px; font-family: var(--font-mono);" value="${targetNim}" placeholder="Ketik NIM Mahasiswa" onkeydown="if(event.key==='Enter') TranskripPage.loadByNim(this.value)">
+            <button class="btn btn-primary btn-sm" onclick="TranskripPage.loadByNim(document.getElementById('inpTargetNim').value)">${isMahasiswa ? 'Cek NIM' : 'Cari Transkrip'}</button>
           </div>
-        ` : `
-          <button class="btn btn-secondary btn-sm" onclick="TranskripPage.loadByNim('${targetNim}')">Muat Ulang</button>
-        `}
+          ${isAdmin ? `
+            <div style="display: flex; gap: 5px; align-items: center;">
+              <span style="font-size: 10.5px; color: var(--text-muted);">Pilih Cepat:</span>
+              <button class="preset-pill" onclick="TranskripPage.loadByNim('227006001')">227006001 (Andi)</button>
+              <button class="preset-pill" onclick="TranskripPage.loadByNim('227006002')">227006002 (Rani)</button>
+              <button class="preset-pill" onclick="TranskripPage.loadByNim('227006003')">227006003 (Cahyo)</button>
+            </div>
+          ` : ''}
+        </div>
       </div>
 
       <!-- Student Summary Card -->

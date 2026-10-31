@@ -267,7 +267,9 @@ const DashboardPage = (() => {
               </tr>
             </thead>
             <tbody>
-              ${logs.slice(0, 5).map(l => `
+              ${logs.length === 0 ? `
+                <tr><td colspan="6" style="text-align: center; padding: 24px; color: var(--text-muted);">Belum ada catatan aktivitas keamanan.</td></tr>
+              ` : logs.slice(0, 5).map(l => `
                 <tr>
                   <td style="font-size: 11px; font-family: var(--font-mono); color: var(--text-muted);">${l.timestamp}</td>
                   <td>${Components.Badge.decision(l.decision)}</td>

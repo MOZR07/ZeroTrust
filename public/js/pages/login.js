@@ -52,6 +52,7 @@ const LoginPage = (() => {
             <div class="preset-pills">
               <button class="preset-pill" onclick="LoginPage.fill('mhs_andi', 'DEV-MHS-ANDI')">Andi (Mahasiswa)</button>
               <button class="preset-pill" onclick="LoginPage.fill('mhs_rani', 'DEV-MHS-RANI')">Rani (Mahasiswa)</button>
+              <button class="preset-pill" onclick="LoginPage.fill('mhs_cahyo', 'DEV-MHS-CAHYO')">Cahyo (Mahasiswa)</button>
               <button class="preset-pill" onclick="LoginPage.fill('dosen_budi', 'DEV-DOSEN-BUDI')">Dr. Budi (Dosen IF301)</button>
               <button class="preset-pill" onclick="LoginPage.fill('dosen_siti', 'DEV-DOSEN-SITI')">Siti M.Kom (Dosen IF302)</button>
               <button class="preset-pill" onclick="LoginPage.fill('admin1', 'DEV-ADMIN-01')">Admin Sistem</button>
