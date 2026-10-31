@@ -78,24 +78,24 @@ const DashboardPage = (() => {
           <table>
             <thead>
               <tr>
-                <th>Kode</th>
+                <th style="width: 100px;">Kode</th>
                 <th>Mata Kuliah</th>
-                <th>SKS</th>
-                <th>Nilai Angka</th>
-                <th>Huruf</th>
-                <th>Status</th>
+                <th class="text-center" style="width: 70px;">SKS</th>
+                <th class="text-center" style="width: 110px;">Nilai Angka</th>
+                <th class="text-center" style="width: 80px;">Huruf</th>
+                <th class="text-center" style="width: 110px;">Status</th>
               </tr>
             </thead>
             <tbody>
               ${items.length === 0 ? `<tr><td colspan="6" style="text-align: center; padding: 24px;">Belum ada nilai terdaftar.</td></tr>` : 
                 items.map(item => `
                   <tr>
-                    <td><code>${item.kode_mk}</code></td>
+                    <td><code style="font-family: var(--font-mono); font-weight: 600;">${item.kode_mk}</code></td>
                     <td><strong>${item.nama_mk}</strong></td>
-                    <td>${item.sks}</td>
-                    <td><strong style="color: var(--accent);">${item.nilai_angka !== null ? item.nilai_angka : '-'}</strong></td>
-                    <td><span class="badge ${item.nilai_huruf ? 'badge-neutral' : ''}">${item.nilai_huruf || '-'}</span></td>
-                    <td>${Components.Badge.finalStatus(item.is_final === 1)}</td>
+                    <td class="text-center">${item.sks}</td>
+                    <td class="text-center"><strong style="color: var(--text-primary);">${item.nilai_angka !== null ? item.nilai_angka : '-'}</strong></td>
+                    <td class="text-center"><span class="badge-grade">${item.nilai_huruf || '-'}</span></td>
+                    <td class="text-center">${Components.Badge.finalStatus(item.is_final === 1)}</td>
                   </tr>
                 `).join('')
               }

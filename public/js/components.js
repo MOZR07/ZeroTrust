@@ -32,9 +32,13 @@ const Components = (() => {
 
     const toast = document.createElement('div');
     toast.className = `toast ${type}`;
+    const icon = type === 'success' ? Icons.check : (type === 'error' ? Icons.alertTriangle : Icons.activity);
     toast.innerHTML = `
-      <div style="flex: 1; font-weight: 500;">${message}</div>
-      <button style="background:none; border:none; color:var(--text-muted); cursor:pointer;" onclick="this.parentElement.remove()">
+      <span style="display:inline-flex; align-items:center; width:16px; height:16px; color:${type === 'success' ? '#059669' : (type === 'error' ? '#DC2626' : '#2563EB')}; margin-top:1px;">
+        ${icon}
+      </span>
+      <div style="flex: 1; font-weight: 500; font-size: 12.5px; line-height: 1.4;">${message}</div>
+      <button class="toast-close" onclick="this.closest('.toast').remove()" title="Tutup">
         ${Icons.x}
       </button>
     `;

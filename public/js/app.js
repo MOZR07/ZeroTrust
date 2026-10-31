@@ -55,25 +55,24 @@ const App = (() => {
               </a>
             ` : ''}
 
-            <div class="nav-section-label">Aksi Cepat Demo</div>
-            <a class="nav-item" onclick="App.handleResetDatabase()" title="Kembalikan database SQLite ke seed awal">
-              ${Components.Icons.lock}
+            <div class="nav-section-label">Alat Pengujian</div>
+            <a class="nav-item" onclick="App.handleResetDatabase()" title="Kembalikan database SQLite ke seed awal" style="color: var(--text-secondary);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>
               <span>Reset Database</span>
             </a>
           </nav>
 
           <div class="sidebar-footer">
             <div class="user-card">
-              <div class="user-avatar">${(user.nama || 'U').charAt(0)}</div>
+              <div class="user-avatar">${(user.nama || 'U').charAt(0).toUpperCase()}</div>
               <div class="user-meta">
                 <div class="user-name" title="${user.nama}">${user.nama}</div>
                 <div class="user-role-badge">${user.role.toUpperCase()}</div>
               </div>
+              <button class="btn-logout-icon" onclick="App.handleLogout()" title="Keluar dari sistem">
+                ${Components.Icons.logout}
+              </button>
             </div>
-            <button class="btn btn-secondary btn-sm" onclick="App.handleLogout()" style="width: 100%; justify-content: center;">
-              ${Components.Icons.logout}
-              <span>Keluar</span>
-            </button>
           </div>
         </aside>
 
@@ -94,8 +93,8 @@ const App = (() => {
                 <span class="dot"></span>
                 <span>${Api.getDeviceId() || 'Device Validated'}</span>
               </div>
-              <div style="font-size: 11px; color: var(--text-muted); font-family: var(--font-mono);">
-                PORT: 3000
+              <div style="font-size: 11px; color: var(--text-muted); font-family: var(--font-mono); background: var(--bg-subtle); padding: 2px 7px; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
+                PORT 3000
               </div>
             </div>
           </header>

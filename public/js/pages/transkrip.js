@@ -68,12 +68,12 @@ const TranskripPage = (() => {
         <table>
           <thead>
             <tr>
-              <th>Kode MK</th>
+              <th style="width: 100px;">Kode MK</th>
               <th>Nama Mata Kuliah</th>
-              <th>SKS</th>
-              <th>Nilai Angka</th>
-              <th>Nilai Huruf</th>
-              <th>Waktu Sinkronisasi (Audit)</th>
+              <th class="text-center" style="width: 80px;">SKS</th>
+              <th class="text-center" style="width: 110px;">Nilai Angka</th>
+              <th class="text-center" style="width: 80px;">Nilai Huruf</th>
+              <th style="width: 180px;">Waktu Sinkronisasi (Audit)</th>
             </tr>
           </thead>
           <tbody id="transkripTableBody">
@@ -120,9 +120,9 @@ const TranskripPage = (() => {
         <tr>
           <td><code style="font-family: var(--font-mono); font-weight: 600;">${item.kode_mk}</code></td>
           <td><strong>${item.nama_mk}</strong></td>
-          <td>${item.sks} SKS</td>
-          <td><strong style="color: var(--text-primary);">${item.nilai_angka}</strong></td>
-          <td><span class="badge badge-success">${item.nilai_huruf}</span></td>
+          <td class="text-center">${item.sks} SKS</td>
+          <td class="text-center"><strong style="color: var(--text-primary);">${item.nilai_angka}</strong></td>
+          <td class="text-center"><span class="badge-grade">${item.nilai_huruf}</span></td>
           <td style="font-size: 11.5px; font-family: var(--font-mono); color: var(--text-muted);">${item.synced_at}</td>
         </tr>
       `).join('');

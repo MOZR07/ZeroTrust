@@ -61,14 +61,14 @@ const NilaiPage = (() => {
         <table>
           <thead>
             <tr>
-              <th>ID</th>
+              <th style="width: 60px;">ID</th>
               <th>Mata Kuliah</th>
-              <th>NIM</th>
+              <th style="width: 110px;">NIM</th>
               <th>Nama Mahasiswa</th>
-              <th>Nilai Angka</th>
-              <th>Huruf</th>
-              <th>Status</th>
-              <th style="text-align: right;">Aksi</th>
+              <th class="text-center" style="width: 100px;">Nilai Angka</th>
+              <th class="text-center" style="width: 70px;">Huruf</th>
+              <th class="text-center" style="width: 100px;">Status</th>
+              <th style="text-align: right; width: 130px;">Aksi</th>
             </tr>
           </thead>
           <tbody id="nilaiTableBody">
@@ -164,17 +164,17 @@ const NilaiPage = (() => {
           </td>
           <td><code style="font-family: var(--font-mono);">${item.nim}</code></td>
           <td><strong>${namaMhs}</strong></td>
-          <td>
+          <td class="text-center">
             <strong style="color: var(--text-primary); font-size: 13px;">
               ${item.nilai_angka !== null ? item.nilai_angka : '-'}
             </strong>
           </td>
-          <td>
-            <span class="badge ${item.nilai_huruf ? 'badge-neutral' : ''}">
+          <td class="text-center">
+            <span class="badge-grade">
               ${item.nilai_huruf || '-'}
             </span>
           </td>
-          <td>${Components.Badge.finalStatus(isFinal)}</td>
+          <td class="text-center">${Components.Badge.finalStatus(isFinal)}</td>
           <td style="text-align: right;">${actionBtn}</td>
         </tr>
       `;

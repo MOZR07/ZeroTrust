@@ -73,7 +73,15 @@ body {
    App Layout Structure
    -------------------------------------------------------------------------- */
 #app {
+  width: 100%;
+  min-height: 100vh;
   display: flex;
+  flex-direction: column;
+}
+
+#appLayout {
+  display: flex;
+  width: 100%;
   min-height: 100vh;
 }
 
@@ -192,12 +200,9 @@ body {
 }
 
 .sidebar-footer {
-  padding: 14px 12px;
+  padding: 12px 14px;
   border-top: 1px solid var(--border-subtle);
-  background: #FAFAFA;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  background: var(--bg-surface);
 }
 
 .user-card {
@@ -209,15 +214,15 @@ body {
 .user-avatar {
   width: 32px;
   height: 32px;
+  min-width: 32px;
   border-radius: 50%;
-  background: var(--bg-subtle);
-  border: 1px solid var(--border-subtle);
+  background: var(--primary);
+  color: #FFFFFF;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 600;
-  font-size: 11px;
-  color: var(--text-secondary);
+  font-size: 12px;
 }
 
 .user-meta {
@@ -236,13 +241,42 @@ body {
 
 .user-role-badge {
   display: inline-block;
-  font-size: 10px;
+  font-size: 9.5px;
   font-family: var(--font-mono);
+  font-weight: 600;
   color: var(--accent);
   background: var(--accent-light);
   padding: 1px 5px;
   border-radius: var(--radius-sm);
   margin-top: 2px;
+  text-transform: uppercase;
+}
+
+.btn-logout-icon {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.12s ease;
+  padding: 0;
+}
+
+.btn-logout-icon:hover {
+  background: var(--danger-bg);
+  color: var(--danger-text);
+  border-color: var(--danger-border);
+}
+
+.btn-logout-icon svg {
+  width: 14px;
+  height: 14px;
 }
 
 /* Main Wrapper */
@@ -389,6 +423,10 @@ body {
   border-radius: var(--radius-lg);
   padding: 16px 18px;
   box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 104px;
 }
 
 .stat-label {
@@ -454,6 +492,7 @@ th {
   letter-spacing: 0.04em;
   color: var(--text-secondary);
   border-bottom: 1px solid var(--border-subtle);
+  vertical-align: middle;
 }
 
 td {
@@ -462,6 +501,29 @@ td {
   color: var(--text-secondary);
   border-bottom: 1px solid var(--border-subtle);
   vertical-align: middle;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.text-right {
+  text-align: right !important;
+}
+
+.badge-grade {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 22px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 11px;
+  color: var(--text-primary);
 }
 
 tr:last-child td {
@@ -616,86 +678,107 @@ tr:hover td {
 }
 
 /* --------------------------------------------------------------------------
-   Login Page Styling (Minimalist Split/Center)
+   Login Page Styling (Centered Minimalist Card)
    -------------------------------------------------------------------------- */
 .login-container {
+  flex: 1;
+  width: 100%;
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #F8F9FA;
-  padding: 24px;
+  background-color: var(--bg-app);
+  padding: 16px;
+  box-sizing: border-box;
 }
 
 .login-card {
   width: 100%;
-  max-width: 440px;
+  max-width: 420px;
   background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-xl);
-  padding: 32px;
+  padding: 22px 24px;
   box-shadow: var(--shadow-md);
+  margin: auto;
 }
 
 .login-header {
-  margin-bottom: 24px;
-  text-align: left;
+  margin-bottom: 14px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .login-header .brand-icon {
   width: 32px;
   height: 32px;
   font-size: 14px;
-  margin-bottom: 12px;
+  margin-bottom: 6px;
+  border-radius: var(--radius-md);
 }
 
 .login-title {
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 600;
   color: var(--text-primary);
   letter-spacing: -0.01em;
 }
 
 .login-subtitle {
-  font-size: 12.5px;
+  font-size: 11.5px;
   color: var(--text-secondary);
-  margin-top: 4px;
+  margin-top: 2px;
 }
 
 .field {
   display: flex;
   flex-direction: column;
-  gap: 5px;
-  margin-bottom: 14px;
+  gap: 3px;
+  margin-bottom: 10px;
 }
 
 .field label {
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 500;
   color: var(--text-primary);
 }
 
 .login-presets {
-  margin-top: 20px;
-  padding-top: 18px;
+  margin-top: 14px;
+  padding-top: 12px;
   border-top: 1px solid var(--border-subtle);
 }
 
 .preset-title {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 8px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  font-size: 10px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+  margin-bottom: 6px;
 }
 
 .preset-pills {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 5px;
+  justify-content: center;
+}
+
+.preset-pill {
+  font-size: 10.5px;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.1s ease;
 }
 
 .preset-pill {
@@ -831,6 +914,29 @@ tr:hover td {
 .toast.success { border-left: 4px solid #10B981; }
 .toast.error { border-left: 4px solid #EF4444; }
 .toast.info { border-left: 4px solid var(--accent); }
+
+.toast-close {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  border-radius: var(--radius-sm);
+  transition: all 0.12s ease;
+}
+
+.toast-close:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+.toast-close svg {
+  width: 14px;
+  height: 14px;
+}
 
 @keyframes toastSlide {
   from { transform: translateY(12px); opacity: 0; }
