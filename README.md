@@ -165,7 +165,14 @@ Semua akun menggunakan password default: **`password123`**
 
 ---
 
-## 6. Contoh Request cURL untuk Pengujian Manual
+## 6. Panduan Video Demo
+
+Panduan dan naskah rekaman video demo 100% full web browser (durasi 6–8 menit sesuai luaran praktikum) tersedia lengkap di:
+👉 **[`PANDUAN_DEMO.md`](./PANDUAN_DEMO.md)**
+
+---
+
+## 7. Contoh Request cURL untuk Pengujian Manual
 
 ### 1. Login Mahasiswa (Mendapatkan Token)
 ```bash
