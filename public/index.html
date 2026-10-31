@@ -3,29 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sistem Nilai Zero Trust · NIST SP 800-207 Dashboard</title>
+  <title>Sistem Nilai Akademik · Zero Trust Architecture</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-base: #0f0f0f;
-      --bg-surface: #171717;
-      --bg-card: #1c1c1c;
-      --bg-input: #121212;
-      --border-subtle: #242424;
-      --border-default: #2e2e2e;
-      --border-prominent: #363636;
-      --text-primary: #fafafa;
-      --text-secondary: #b4b4b4;
-      --text-muted: #898989;
-      --brand-green: #3ecf8e;
-      --brand-green-glow: rgba(62, 207, 142, 0.2);
-      --danger: #ef4444;
-      --danger-glow: rgba(239, 68, 68, 0.2);
+      --bg-base: #090a0f;
+      --bg-surface: #11141d;
+      --bg-card: #151924;
+      --bg-input: #0c0e15;
+      --border-subtle: rgba(255, 255, 255, 0.06);
+      --border-default: rgba(255, 255, 255, 0.1);
+      --border-focus: #10b981;
+      --text-primary: #f4f4f5;
+      --text-secondary: #a1a1aa;
+      --text-muted: #71717a;
+      --accent: #10b981;
+      --accent-glow: rgba(16, 185, 129, 0.15);
+      --danger: #f43f5e;
+      --danger-bg: rgba(244, 63, 94, 0.1);
       --warning: #f59e0b;
       --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-      --font-mono: 'Source Code Pro', ui-monospace, monospace;
+      --font-mono: 'JetBrains Mono', ui-monospace, monospace;
     }
 
     * {
@@ -38,82 +38,20 @@
       background-color: var(--bg-base);
       color: var(--text-primary);
       font-family: var(--font-sans);
-      font-size: 14px;
+      font-size: 13px;
       line-height: 1.5;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* Modern minimalist refresh */
-    :root {
-      --bg-base: #090d16;
-      --bg-surface: #101725;
-      --bg-card: #131d2d;
-      --bg-input: #0b1220;
-      --border-subtle: #1c293b;
-      --border-default: #26364d;
-      --border-prominent: #354a65;
-      --text-primary: #edf3fb;
-      --text-secondary: #b4c1d2;
-      --text-muted: #8291a5;
-      --brand-green: #64e2b2;
-      --brand-green-glow: rgba(100, 226, 178, 0.16);
-      --danger: #ff7885;
-      --danger-glow: rgba(255, 120, 133, 0.16);
-      --warning: #ffc66d;
-    }
-
-    body {
-      background:
-        radial-gradient(ellipse at 12% 0%, rgba(54, 104, 170, .14), transparent 38%),
-        var(--bg-base);
-      letter-spacing: .005em;
-    }
-
+    /* Top Navigation Header */
     header {
-      background: rgba(16, 23, 37, .88);
-      backdrop-filter: blur(16px);
-      border-bottom-color: rgba(83, 108, 143, .25);
-      padding: 14px clamp(16px, 3vw, 40px);
-    }
-
-    .container {
-      max-width: 1480px;
-      padding: clamp(16px, 2.4vw, 32px);
-      gap: 20px;
-    }
-
-    .card {
-      background: linear-gradient(155deg, rgba(20, 31, 48, .98), rgba(14, 22, 35, .98));
-      border-color: rgba(91, 119, 157, .24);
-      border-radius: 16px;
-      box-shadow: 0 14px 34px rgba(0, 0, 0, .16);
-    }
-
-    .btn { font-weight: 600; }
-    .btn-primary { box-shadow: 0 5px 16px rgba(100, 226, 178, .12); }
-    .btn-primary:hover { transform: translateY(-1px); }
-    .tab-btn { font-family: var(--font-sans); font-weight: 600; }
-    .tab-btn.active { background: rgba(100, 226, 178, .09); border-color: rgba(100, 226, 178, .3); color: var(--brand-green); }
-    input, select { border-radius: 9px; }
-    .table-container { border-radius: 12px; }
-
-    @media (max-width: 960px) {
-      .container { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 680px) {
-      header { align-items: flex-start; gap: 12px; flex-wrap: wrap; }
-      .tabs-header { overflow-x: auto; flex-wrap: nowrap; }
-      .tab-btn { white-space: nowrap; }
-      .presets-grid { grid-template-columns: 1fr 1fr; }
-    }
-
-    /* Navbar */
-    header {
-      background: var(--bg-surface);
-      border-bottom: 1px solid var(--border-default);
-      padding: 14px 24px;
+      background: rgba(17, 20, 29, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 14px 28px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -129,110 +67,139 @@
     }
 
     .brand-icon {
-      width: 24px;
-      height: 24px;
-      background: var(--brand-green);
-      border-radius: 6px;
+      width: 28px;
+      height: 28px;
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 14px var(--brand-green-glow);
+      box-shadow: 0 0 12px var(--accent-glow);
     }
 
     .brand-icon svg {
-      width: 14px;
-      height: 14px;
-      fill: #0f0f0f;
+      width: 15px;
+      height: 15px;
+      fill: #ffffff;
     }
 
     .brand-title {
       font-weight: 600;
-      font-size: 15px;
+      font-size: 14px;
+      color: var(--text-primary);
       letter-spacing: -0.2px;
     }
 
     .brand-badge {
       font-family: var(--font-mono);
-      font-size: 11px;
-      text-transform: uppercase;
-      padding: 2px 8px;
-      background: rgba(62, 207, 142, 0.12);
-      color: var(--brand-green);
-      border: 1px solid rgba(62, 207, 142, 0.3);
+      font-size: 10px;
+      font-weight: 500;
+      padding: 2px 7px;
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--accent);
+      border: 1px solid rgba(16, 185, 129, 0.25);
       border-radius: 9999px;
-      letter-spacing: 0.5px;
+      margin-left: 4px;
+    }
+
+    .architecture-badges {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .architecture-badges span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .dot-live {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 6px var(--accent);
     }
 
     .user-status {
       display: flex;
       align-items: center;
-      gap: 14px;
-      font-size: 13px;
+      gap: 12px;
+      font-size: 12px;
     }
 
     .status-dot {
-      width: 8px;
-      height: 8px;
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
       background: var(--text-muted);
     }
 
     .status-dot.active {
-      background: var(--brand-green);
-      box-shadow: 0 0 8px var(--brand-green);
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
     }
 
     /* Layout */
     .container {
-      max-width: 1280px;
+      max-width: 1400px;
       margin: 0 auto;
-      padding: 24px;
+      padding: 24px 28px;
       width: 100%;
       flex: 1;
       display: grid;
-      grid-template-columns: 340px 1fr;
+      grid-template-columns: 330px 1fr;
       gap: 24px;
     }
 
     @media (max-width: 960px) {
       .container {
         grid-template-columns: 1fr;
+        padding: 16px;
+      }
+      .architecture-badges {
+        display: none;
       }
     }
 
-    /* Panel Card */
+    /* Cards */
     .card {
       background: var(--bg-surface);
-      border: 1px solid var(--border-default);
+      border: 1px solid var(--border-subtle);
       border-radius: 12px;
-      padding: 20px;
+      padding: 18px;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 14px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     }
 
     .card-title {
-      font-size: 13px;
+      font-size: 11px;
       font-family: var(--font-mono);
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 0.8px;
       color: var(--text-muted);
       display: flex;
       align-items: center;
       justify-content: space-between;
       border-bottom: 1px solid var(--border-subtle);
-      padding-bottom: 10px;
+      padding-bottom: 8px;
     }
 
-    /* Form Inputs */
+    /* Forms */
     .field-group {
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 5px;
     }
 
     label {
-      font-size: 12px;
+      font-size: 11px;
       color: var(--text-secondary);
       font-weight: 500;
     }
@@ -241,92 +208,83 @@
       background: var(--bg-input);
       border: 1px solid var(--border-default);
       color: var(--text-primary);
-      padding: 8px 12px;
-      border-radius: 6px;
+      padding: 8px 11px;
+      border-radius: 7px;
       font-family: var(--font-sans);
-      font-size: 13px;
-      transition: all 0.2s;
+      font-size: 12px;
+      transition: all 0.15s ease;
     }
 
     input:focus, select:focus {
       outline: none;
-      border-color: var(--brand-green);
-      box-shadow: 0 0 0 2px var(--brand-green-glow);
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 2px var(--accent-glow);
     }
 
     /* Buttons */
     .btn {
       font-family: var(--font-sans);
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 500;
-      padding: 8px 16px;
-      border-radius: 9999px;
+      padding: 7px 14px;
+      border-radius: 7px;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      transition: all 0.2s;
+      gap: 6px;
+      transition: all 0.15s ease;
       border: 1px solid transparent;
     }
 
     .btn-primary {
-      background: var(--brand-green);
-      color: #0f0f0f;
+      background: var(--accent);
+      color: #052e16;
+      font-weight: 600;
     }
 
     .btn-primary:hover {
-      background: #34b379;
-      box-shadow: 0 0 12px var(--brand-green-glow);
+      background: #34d399;
+      box-shadow: 0 0 12px var(--accent-glow);
     }
 
     .btn-secondary {
       background: transparent;
-      color: var(--text-primary);
-      border-color: var(--border-prominent);
+      color: var(--text-secondary);
+      border-color: var(--border-default);
     }
 
     .btn-secondary:hover {
-      background: var(--bg-card);
-      border-color: var(--text-secondary);
-    }
-
-    .btn-danger {
-      background: transparent;
-      color: var(--danger);
-      border-color: rgba(239, 68, 68, 0.4);
-    }
-
-    .btn-danger:hover {
-      background: rgba(239, 68, 68, 0.1);
-      border-color: var(--danger);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-primary);
+      border-color: rgba(255, 255, 255, 0.2);
     }
 
     .btn-sm {
-      padding: 4px 10px;
+      padding: 4px 9px;
       font-size: 11px;
     }
 
-    /* Preset Accounts Buttons */
+    /* Presets */
     .presets-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 8px;
+      gap: 6px;
     }
 
     .preset-btn {
       background: var(--bg-card);
-      border: 1px solid var(--border-default);
-      padding: 8px;
-      border-radius: 6px;
+      border: 1px solid var(--border-subtle);
+      padding: 8px 10px;
+      border-radius: 8px;
       text-align: left;
       cursor: pointer;
-      transition: all 0.15s;
+      transition: all 0.15s ease;
     }
 
     .preset-btn:hover {
-      border-color: var(--brand-green);
-      background: rgba(62, 207, 142, 0.05);
+      border-color: var(--accent);
+      background: rgba(16, 185, 129, 0.04);
     }
 
     .preset-name {
@@ -336,71 +294,80 @@
     }
 
     .preset-role {
-      font-size: 11px;
+      font-size: 10px;
       font-family: var(--font-mono);
-      color: var(--brand-green);
+      color: var(--accent);
     }
 
     .preset-dev {
-      font-size: 10px;
+      font-size: 9px;
       color: var(--text-muted);
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
     }
 
-    /* Right Main Panel Tabs */
+    /* Tabs Header */
     .tabs-header {
       display: flex;
-      gap: 8px;
-      border-bottom: 1px solid var(--border-default);
-      padding-bottom: 12px;
+      gap: 6px;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 10px;
     }
 
     .tab-btn {
       background: transparent;
       color: var(--text-muted);
-      font-family: var(--font-mono);
+      font-family: var(--font-sans);
       font-size: 12px;
+      font-weight: 500;
       padding: 6px 14px;
-      border-radius: 9999px;
+      border-radius: 6px;
       border: 1px solid transparent;
       cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .tab-btn:hover {
+      color: var(--text-secondary);
+      background: rgba(255, 255, 255, 0.03);
     }
 
     .tab-btn.active {
       color: var(--text-primary);
       background: var(--bg-card);
       border-color: var(--border-default);
+      font-weight: 600;
     }
 
     /* Tables */
     .table-container {
       overflow-x: auto;
-      border: 1px solid var(--border-default);
+      border: 1px solid var(--border-subtle);
       border-radius: 8px;
+      background: var(--bg-card);
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 13px;
+      font-size: 12px;
     }
 
     th {
-      background: var(--bg-card);
+      background: rgba(0, 0, 0, 0.2);
       text-align: left;
-      padding: 10px 14px;
+      padding: 9px 12px;
       font-family: var(--font-mono);
-      font-size: 11px;
+      font-size: 10px;
       color: var(--text-muted);
       text-transform: uppercase;
-      letter-spacing: 0.5px;
-      border-bottom: 1px solid var(--border-default);
+      letter-spacing: 0.6px;
+      border-bottom: 1px solid var(--border-subtle);
     }
 
     td {
-      padding: 10px 14px;
+      padding: 10px 12px;
       border-bottom: 1px solid var(--border-subtle);
       color: var(--text-secondary);
     }
@@ -410,79 +377,78 @@
     }
 
     tr:hover td {
-      background: rgba(255, 255, 255, 0.02);
+      background: rgba(255, 255, 255, 0.015);
       color: var(--text-primary);
     }
 
+    /* Badges */
     .badge {
       display: inline-block;
-      padding: 2px 8px;
+      padding: 2px 7px;
       border-radius: 4px;
-      font-size: 11px;
+      font-size: 10px;
       font-family: var(--font-mono);
       font-weight: 500;
+      letter-spacing: 0.3px;
     }
 
     .badge-allow {
-      background: rgba(62, 207, 142, 0.15);
-      color: var(--brand-green);
-      border: 1px solid rgba(62, 207, 142, 0.3);
+      background: rgba(16, 185, 129, 0.12);
+      color: var(--accent);
+      border: 1px solid rgba(16, 185, 129, 0.3);
     }
 
     .badge-deny {
-      background: rgba(239, 68, 68, 0.15);
+      background: var(--danger-bg);
       color: var(--danger);
-      border: 1px solid rgba(239, 68, 68, 0.3);
+      border: 1px solid rgba(244, 63, 94, 0.3);
     }
 
     .badge-final {
-      background: rgba(59, 130, 246, 0.15);
-      color: #60a5fa;
-      border: 1px solid rgba(59, 130, 246, 0.3);
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--accent);
+      border: 1px solid rgba(16, 185, 129, 0.25);
     }
 
     .badge-draft {
-      background: rgba(245, 158, 11, 0.15);
+      background: rgba(245, 158, 11, 0.1);
       color: var(--warning);
-      border: 1px solid rgba(245, 158, 11, 0.3);
+      border: 1px solid rgba(245, 158, 11, 0.25);
     }
 
-    /* Response / Alert Box */
+    /* Alerts */
     .alert-box {
-      border-radius: 6px;
-      padding: 10px 14px;
-      font-size: 12px;
-      font-family: var(--font-mono);
+      padding: 9px 12px;
+      border-radius: 7px;
+      font-size: 11px;
       display: none;
-      word-break: break-all;
     }
 
     .alert-box.success {
-      display: block;
-      background: rgba(62, 207, 142, 0.08);
-      border: 1px solid rgba(62, 207, 142, 0.3);
-      color: var(--brand-green);
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: var(--accent);
     }
 
     .alert-box.error {
-      display: block;
-      background: rgba(239, 68, 68, 0.08);
-      border: 1px solid rgba(239, 68, 68, 0.3);
+      background: var(--danger-bg);
+      border: 1px solid rgba(244, 63, 94, 0.3);
       color: var(--danger);
     }
 
-    /* Terminal-style Code view */
+    /* Code block */
     .code-block {
-      background: var(--bg-base);
-      border: 1px solid var(--border-default);
-      border-radius: 6px;
-      padding: 12px;
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      border-radius: 7px;
+      padding: 10px;
       font-family: var(--font-mono);
-      font-size: 12px;
+      font-size: 11px;
       color: var(--text-secondary);
-      max-height: 240px;
+      max-height: 180px;
       overflow-y: auto;
       white-space: pre-wrap;
+      word-break: break-all;
     }
   </style>
 </head>
@@ -495,16 +461,16 @@
         <svg viewBox="0 0 24 24"><path d="M12 2L3 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5zm0 2.18l7 3.89v4.93c0 4.54-3.13 8.79-7 9.94-3.87-1.15-7-5.4-7-9.94V8.07l7-3.89z"/></svg>
       </div>
       <div>
-        <span class="brand-title">Zero Trust PEP Gateway</span>
+        <span class="brand-title">Zero Trust Academic Gateway</span>
         <span class="brand-badge">NIST SP 800-207</span>
       </div>
     </div>
 
-    <!-- Micro Architecture Indicator -->
-    <div style="display: flex; gap: 14px; align-items: center; font-size: 11px; font-family: var(--font-mono); color: var(--text-muted);">
-      <span style="display: flex; align-items: center; gap: 4px;"><span style="color: var(--brand-green);">●</span> Gateway PEP :3000</span>
-      <span style="display: flex; align-items: center; gap: 4px;"><span style="color: var(--brand-green);">●</span> Nilai :3001</span>
-      <span style="display: flex; align-items: center; gap: 4px;"><span style="color: var(--brand-green);">●</span> Transkrip :3002</span>
+    <!-- Active Port Architecture -->
+    <div class="architecture-badges">
+      <span><span class="dot-live"></span> Gateway PEP :3000</span>
+      <span><span class="dot-live"></span> Nilai :3001</span>
+      <span><span class="dot-live"></span> Transkrip :3002</span>
     </div>
 
     <div class="user-status">
@@ -518,36 +484,36 @@
   <main class="container">
 
     <!-- LEFT COLUMN: AUTHENTICATION & CONTEXT CONTROLS -->
-    <aside style="display: flex; flex-direction: column; gap: 20px;">
+    <aside style="display: flex; flex-direction: column; gap: 16px;">
       
       <!-- Quick Fill Preset Accounts -->
       <section class="card">
         <div class="card-title">
-          <span>Preset Persona Uji</span>
-          <span style="font-size: 10px; color: var(--brand-green);">⚡ 1-Click Login</span>
+          <span>Preset Akun</span>
+          <span style="font-size: 9px; color: var(--text-muted);">Klik isi otomatis</span>
         </div>
         <div class="presets-grid">
-          <button class="preset-btn" onclick="quickLogin('mhs_andi', 'DEV-MHS-ANDI')">
+          <button class="preset-btn" onclick="fillPreset('mhs_andi', 'DEV-MHS-ANDI')">
             <div class="preset-name">Andi</div>
             <div class="preset-role">mahasiswa</div>
             <div class="preset-dev">DEV-MHS-ANDI</div>
           </button>
-          <button class="preset-btn" onclick="quickLogin('mhs_rani', 'DEV-MHS-RANI')">
+          <button class="preset-btn" onclick="fillPreset('mhs_rani', 'DEV-MHS-RANI')">
             <div class="preset-name">Rani</div>
             <div class="preset-role">mahasiswa</div>
             <div class="preset-dev">DEV-MHS-RANI</div>
           </button>
-          <button class="preset-btn" onclick="quickLogin('dosen_budi', 'DEV-DOSEN-BUDI')">
+          <button class="preset-btn" onclick="fillPreset('dosen_budi', 'DEV-DOSEN-BUDI')">
             <div class="preset-name">Dr. Budi</div>
             <div class="preset-role">dosen (IF301)</div>
             <div class="preset-dev">DEV-DOSEN-BUDI</div>
           </button>
-          <button class="preset-btn" onclick="quickLogin('dosen_siti', 'DEV-DOSEN-SITI')">
+          <button class="preset-btn" onclick="fillPreset('dosen_siti', 'DEV-DOSEN-SITI')">
             <div class="preset-name">Siti M.Kom</div>
             <div class="preset-role">dosen (IF302)</div>
             <div class="preset-dev">DEV-DOSEN-SITI</div>
           </button>
-          <button class="preset-btn" onclick="quickLogin('admin1', 'DEV-ADMIN-01')" style="grid-column: span 2;">
+          <button class="preset-btn" onclick="fillPreset('admin1', 'DEV-ADMIN-01')" style="grid-column: span 2;">
             <div class="preset-name">Administrator Sistem</div>
             <div class="preset-role">admin</div>
             <div class="preset-dev">DEV-ADMIN-01</div>
@@ -558,10 +524,10 @@
       <!-- Login Form Card -->
       <section class="card">
         <div class="card-title">
-          <span>Autentikasi & Konteks</span>
+          <span>Otentikasi & Konteks</span>
         </div>
 
-        <form id="loginForm" onsubmit="handleLogin(event)" style="display: flex; flex-direction: column; gap: 12px;">
+        <form id="loginForm" onsubmit="handleLogin(event)" style="display: flex; flex-direction: column; gap: 10px;">
           <div class="field-group">
             <label for="inpUsername">Username</label>
             <input type="text" id="inpUsername" required placeholder="Contoh: dosen_budi">
@@ -586,7 +552,7 @@
             </select>
           </div>
 
-          <button type="submit" class="btn btn-primary" style="margin-top: 6px;">
+          <button type="submit" class="btn btn-primary" style="margin-top: 4px;">
             Login & Minta Token
           </button>
         </form>
@@ -597,21 +563,20 @@
       <!-- Active Token Details -->
       <section class="card">
         <div class="card-title">
-          <span>Payload Token Aktif</span>
-          <button class="btn btn-secondary btn-sm" onclick="handleRefreshToken()">Refresh Token</button>
+          <span>Payload Token JWT</span>
+          <button class="btn btn-secondary btn-sm" onclick="handleRefreshToken()">Refresh</button>
         </div>
         <div class="code-block" id="tokenDisplay">Belum ada token aktif. Silakan login.</div>
       </section>
 
     </aside>
 
-    <!-- RIGHT COLUMN: RESOURCES & POLICY EVALUATION WORKSPACE -->
-    <section class="card" style="min-height: 600px;">
+    <!-- RIGHT COLUMN: RESOURCES & WORKSPACE -->
+    <section class="card" style="min-height: 580px;">
       
       <!-- Workspace Navigation Tabs -->
       <div class="tabs-header">
-        <button class="tab-btn active" id="tabDemoMode" onclick="switchTab('demo')" style="color: var(--brand-green); border-color: rgba(62,207,142,0.4); background: rgba(62,207,142,0.1);">⚡ Interactive Demo Mode (Semua Skenario)</button>
-        <button class="tab-btn" id="tabNilai" onclick="switchTab('nilai')">Service Nilai (Port 3001)</button>
+        <button class="tab-btn active" id="tabNilai" onclick="switchTab('nilai')">Service Nilai (Port 3001)</button>
         <button class="tab-btn" id="tabTranskrip" onclick="switchTab('transkrip')">Service Transkrip (Port 3002)</button>
         <button class="tab-btn" id="tabAudit" onclick="switchTab('audit')">PEP Audit Logs (Real-time)</button>
       </div>
@@ -620,13 +585,13 @@
       <div id="actionAlert" class="alert-box"></div>
 
       <!-- TAB 1: SERVICE NILAI -->
-      <div id="viewNilai" style="display: flex; flex-direction: column; gap: 16px;">
+      <div id="viewNilai" style="display: flex; flex-direction: column; gap: 14px;">
         <div style="display: flex; justify-content: space-between; align-items: center;">
           <div>
-            <h3 style="font-size: 16px; font-weight: 600;">Data Nilai Mahasiswa</h3>
-            <p style="color: var(--text-muted); font-size: 12px;">Diakses melalui Gateway PEP (/nilai). Difilter otomatis sesuai peran subjek.</p>
+            <h3 style="font-size: 15px; font-weight: 600;">Data Nilai Mahasiswa</h3>
+            <p style="color: var(--text-muted); font-size: 11px;">Diakses via PEP Gateway (/nilai). Difilter otomatis sesuai hak akses peran.</p>
           </div>
-          <button class="btn btn-secondary btn-sm" onclick="loadNilai()">Muat Ulang Nilai</button>
+          <button class="btn btn-secondary btn-sm" onclick="loadNilai()">Muat Ulang</button>
         </div>
 
         <div class="table-container">
@@ -637,10 +602,10 @@
                 <th>Mata Kuliah</th>
                 <th>NIM</th>
                 <th>Nama Mahasiswa</th>
-                <th>Nilai Angka</th>
+                <th>Nilai</th>
                 <th>Huruf</th>
                 <th>Status</th>
-                <th>Aksi (Dosen)</th>
+                <th>Aksi</th>
               </tr>
             </thead>
             <tbody id="tbodyNilai">
@@ -654,38 +619,38 @@
         </div>
 
         <!-- Class Finalization Section (Dosen only) -->
-        <div id="finalisasiSection" style="display: none; background: var(--bg-card); border: 1px solid var(--border-default); border-radius: 8px; padding: 16px; margin-top: 10px;">
-          <h4 style="font-size: 13px; font-family: var(--font-mono); text-transform: uppercase; color: var(--brand-green); margin-bottom: 8px;">
+        <div id="finalisasiSection" style="display: none; background: rgba(0, 0, 0, 0.2); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 14px;">
+          <h4 style="font-size: 12px; font-family: var(--font-mono); text-transform: uppercase; color: var(--accent); margin-bottom: 6px;">
             Aksi Dosen: Finalisasi Kelas & Sinkronisasi Transkrip
           </h4>
-          <p style="color: var(--text-secondary); font-size: 12px; margin-bottom: 12px;">
+          <p style="color: var(--text-secondary); font-size: 11px; margin-bottom: 10px;">
             Memfinalisasi kelas akan mengunci nilai secara permanen dan otomatis memicu Service Nilai meminta Service Token ke Gateway untuk sinkronisasi ke Service Transkrip.
           </p>
-          <div style="display: flex; gap: 10px;">
-            <button class="btn btn-primary btn-sm" onclick="finalisasiKelas(1)">Finalisasi Kelas IF301 (Dosen Budi)</button>
-            <button class="btn btn-secondary btn-sm" onclick="finalisasiKelas(2)">Finalisasi Kelas IF302 (Dosen Siti)</button>
+          <div style="display: flex; gap: 8px;">
+            <button class="btn btn-primary btn-sm" onclick="finalisasiKelas(1)">Finalisasi Kelas IF301 (Dr. Budi)</button>
+            <button class="btn btn-secondary btn-sm" onclick="finalisasiKelas(2)">Finalisasi Kelas IF302 (Siti M.Kom)</button>
           </div>
         </div>
       </div>
 
       <!-- TAB 2: SERVICE TRANSKRIP -->
-      <div id="viewTranskrip" style="display: none; flex-direction: column; gap: 16px;">
-        <div style="display: flex; justify-content: space-between; align-items: center;">
+      <div id="viewTranskrip" style="display: none; flex-direction: column; gap: 14px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
           <div>
-            <h3 style="font-size: 16px; font-weight: 600;">Transkrip Akademik</h3>
-            <p style="color: var(--text-muted); font-size: 12px;">Endpoint /transkrip/:nim. Mahasiswa hanya bisa melihat NIM sendiri, Admin bisa semua.</p>
+            <h3 style="font-size: 15px; font-weight: 600;">Transkrip Akademik Kumulatif</h3>
+            <p style="color: var(--text-muted); font-size: 11px;">Endpoint /transkrip/:nim. Mahasiswa dibatasi hanya melihat NIM miliknya sendiri.</p>
           </div>
-          <div style="display: flex; gap: 8px;">
-            <input type="text" id="targetNim" placeholder="Input NIM Mahasiswa" value="227006001" style="width: 160px; font-size: 12px;">
+          <div style="display: flex; gap: 6px;">
+            <input type="text" id="targetNim" placeholder="Input NIM Mahasiswa" value="227006001" style="width: 150px; font-size: 11px;">
             <button class="btn btn-primary btn-sm" onclick="loadTranskrip()">Lihat Transkrip</button>
           </div>
         </div>
 
-        <div id="transkripSummary" style="display: none; background: var(--bg-card); border: 1px solid var(--border-default); border-radius: 8px; padding: 14px; gap: 16px;">
-          <div><strong>NIM:</strong> <span id="tsNim">-</span></div>
-          <div><strong>Nama:</strong> <span id="tsNama">-</span></div>
-          <div><strong>Total SKS:</strong> <span id="tsSks">-</span></div>
-          <div><strong>IPK Kumulatif:</strong> <span id="tsIpk" style="color: var(--brand-green); font-weight: 700;">-</span></div>
+        <div id="transkripSummary" style="display: none; background: rgba(0,0,0,0.25); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 12px; gap: 12px;">
+          <div><span style="color: var(--text-muted); font-size: 10px; font-family: var(--font-mono);">NIM:</span> <span id="tsNim" style="font-weight: 600;">-</span></div>
+          <div><span style="color: var(--text-muted); font-size: 10px; font-family: var(--font-mono);">NAMA:</span> <span id="tsNama" style="font-weight: 600;">-</span></div>
+          <div><span style="color: var(--text-muted); font-size: 10px; font-family: var(--font-mono);">TOTAL SKS:</span> <span id="tsSks" style="font-weight: 600;">-</span></div>
+          <div><span style="color: var(--text-muted); font-size: 10px; font-family: var(--font-mono);">IPK:</span> <span id="tsIpk" style="color: var(--accent); font-weight: 700;">-</span></div>
         </div>
 
         <div class="table-container">
@@ -695,9 +660,9 @@
                 <th>Kode MK</th>
                 <th>Nama Mata Kuliah</th>
                 <th>SKS</th>
-                <th>Nilai Angka</th>
-                <th>Nilai Huruf</th>
-                <th>Waktu Sinkronisasi</th>
+                <th>Nilai</th>
+                <th>Huruf</th>
+                <th>Waktu Sinkron</th>
               </tr>
             </thead>
             <tbody id="tbodyTranskrip">
@@ -712,11 +677,11 @@
       </div>
 
       <!-- TAB 3: AUDIT LOGS -->
-      <div id="viewAudit" style="display: none; flex-direction: column; gap: 16px;">
+      <div id="viewAudit" style="display: none; flex-direction: column; gap: 14px;">
         <div style="display: flex; justify-content: space-between; align-items: center;">
           <div>
-            <h3 style="font-size: 16px; font-weight: 600;">Zero Trust PEP Audit Trail</h3>
-            <p style="color: var(--text-muted); font-size: 12px;">Mencatat waktu, subjek, endpoint, device ID, keputusan ALLOW/DENY, dan alasan policy.</p>
+            <h3 style="font-size: 15px; font-weight: 600;">Zero Trust PEP Audit Trail</h3>
+            <p style="color: var(--text-muted); font-size: 11px;">Catatan audit real-time mencakup subjek, endpoint, keputusan ALLOW/DENY, dan alasan policy.</p>
           </div>
           <button class="btn btn-secondary btn-sm" onclick="loadAuditLogs()">Muat Ulang Log</button>
         </div>
@@ -729,7 +694,7 @@
                 <th>Keputusan</th>
                 <th>Subjek (Role)</th>
                 <th>Device ID</th>
-                <th>Method & Endpoint</th>
+                <th>Endpoint</th>
                 <th>Alasan Kebijakan PEP</th>
               </tr>
             </thead>
@@ -744,97 +709,12 @@
         </div>
       </div>
 
-      <!-- TAB 4: INTERACTIVE DEMO MODE (NIST SP 800-207 PRESENTER) -->
-      <div id="viewDemo" style="display: flex; flex-direction: column; gap: 16px;">
-        
-        <!-- Live Presenter Stepper Card -->
-        <div class="card" style="padding: 20px; gap: 16px; border: 1px solid rgba(100, 226, 178, 0.35); background: linear-gradient(175deg, rgba(19, 29, 45, 0.98), rgba(11, 18, 30, 0.98)); box-shadow: 0 12px 32px rgba(0,0,0,0.3);">
-          
-          <!-- Presenter Header -->
-          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; border-bottom: 1px solid rgba(255,255,255,0.07); padding-bottom: 12px;">
-            <div style="display: flex; align-items: center; gap: 10px;">
-              <span class="brand-badge" style="background: rgba(100, 226, 178, 0.15); border-color: rgba(100, 226, 178, 0.4); color: var(--brand-green);">⚡ LIVE DEMO CONSOLE</span>
-              <span id="activeReqBadge" class="badge badge-draft" style="font-size: 11px;">Kebutuhan 4.1</span>
-            </div>
-            <div style="display: flex; gap: 8px; align-items: center;">
-              <button class="btn btn-secondary btn-sm" onclick="resetDatabaseDemo()" title="Kembalikan database SQLite ke data awal">↺ Reset Database</button>
-              <span id="stepCounterLabel" style="font-size: 12px; font-family: var(--font-mono); color: var(--text-muted);">Skenario 1 / 8</span>
-            </div>
-          </div>
-
-          <!-- Step Pills Navigation -->
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 6px;" id="demoStepperBar">
-            <button class="tab-btn active" id="stepPill-1" onclick="selectDemoStep(1)" style="font-size: 11px; padding: 6px 8px; text-align: center;">1. Bypass 3001</button>
-            <button class="tab-btn" id="stepPill-2" onclick="selectDemoStep(2)" style="font-size: 11px; padding: 6px 8px; text-align: center;">2. Assume Breach</button>
-            <button class="tab-btn" id="stepPill-3" onclick="selectDemoStep(3)" style="font-size: 11px; padding: 6px 8px; text-align: center;">3. Device ID</button>
-            <button class="tab-btn" id="stepPill-4" onclick="selectDemoStep(4)" style="font-size: 11px; padding: 6px 8px; text-align: center;">4. Jam Akses</button>
-            <button class="tab-btn" id="stepPill-5" onclick="selectDemoStep(5)" style="font-size: 11px; padding: 6px 8px; text-align: center;">5. ABAC Dosen</button>
-            <button class="tab-btn" id="stepPill-6" onclick="selectDemoStep(6)" style="font-size: 11px; padding: 6px 8px; text-align: center;">6. Privasi Mhs</button>
-            <button class="tab-btn" id="stepPill-7" onclick="selectDemoStep(7)" style="font-size: 11px; padding: 6px 8px; text-align: center;">7. Inter-Service</button>
-            <button class="tab-btn" id="stepPill-8" onclick="selectDemoStep(8)" style="font-size: 11px; padding: 6px 8px; text-align: center;">8. Sinkron Protect</button>
-          </div>
-
-          <!-- Title and Description of Active Scenario -->
-          <div>
-            <h3 id="activeTitle" style="font-size: 16px; font-weight: 700; color: #ffffff; letter-spacing: -0.2px;">
-              1. Uji Penetrasi: Direct Access Bypass Port 3001 (Tanpa Gateway Secret)
-            </h3>
-            <p id="activeDesc" style="color: var(--text-secondary); font-size: 12px; margin-top: 3px;">
-              Penyerang mencoba menembak Service Nilai (port 3001) langsung tanpa melewati API Gateway.
-            </p>
-          </div>
-
-          <!-- Teleprompter Box for Video Recording -->
-          <div style="background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(100, 226, 178, 0.25); border-left: 4px solid var(--brand-green); border-radius: 8px; padding: 14px;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-              <span style="font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; color: var(--brand-green); font-weight: 600; letter-spacing: 0.5px;">
-                🎙️ NASKAH SUARA UNTUK DOSEN (TINGGAL DIBACA SAAT REKAM):
-              </span>
-              <button class="btn btn-secondary btn-sm" onclick="copySpeechText()" style="padding: 2px 8px; font-size: 10px;">Salin Teks</button>
-            </div>
-            <p id="activeSpeech" style="font-size: 14px; line-height: 1.6; color: #edf3fb; font-weight: 400; margin: 0;">
-              "Pengujian pertama adalah pencegahan bypass langsung ke Service Nilai di port 3001. Penyerang mencoba mengakses resource tanpa melewati Gateway PEP. Seperti yang terlihat pada hasil respon, statusnya HTTP 403 Forbidden karena tidak ada header rahasia X-Gateway-Secret. Hal ini memastikan bahwa seluruh lalu lintas wajib melewati API Gateway."
-            </p>
-          </div>
-
-          <!-- Actions: Run & Next -->
-          <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
-            <button class="btn btn-primary" onclick="runActiveScenario()" style="padding: 10px 24px; font-size: 14px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px;">
-              <span>▶</span> Jalankan Uji Skenario Ini
-            </button>
-            <button class="btn btn-secondary" onclick="nextDemoScenario()" style="padding: 10px 18px; font-size: 13px;">
-              Skenario Berikutnya ❯
-            </button>
-          </div>
-
-          <!-- Live Result Terminal Box -->
-          <div id="demoOutputBox" style="display: none; background: #080d15; border: 1px solid var(--border-default); border-radius: 8px; padding: 14px; margin-top: 4px;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 6px;">
-              <strong id="demoScenarioTitle" style="font-family: var(--font-mono); font-size: 12px; color: var(--brand-green);">Hasil Respon Policy Engine</strong>
-              <span id="demoHttpStatus" class="badge"></span>
-            </div>
-            <div style="display: flex; flex-direction: column; gap: 6px;">
-              <div>
-                <span style="color: var(--text-muted); font-family: var(--font-mono); font-size: 11px;">EVALUASI POLICY PEP:</span> 
-                <span id="demoActionDesc" style="color: var(--text-primary); font-size: 12px; font-weight: 500;"></span>
-              </div>
-              <div style="margin-top: 4px;">
-                <span style="color: var(--text-muted); font-family: var(--font-mono); font-size: 11px;">RAW RESPONSE JSON:</span>
-                <pre id="demoRawResult" class="code-block" style="max-height: 140px; font-size: 11px; margin-top: 4px;"></pre>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-
     </section>
 
   </main>
 
   <script>
-    // State
+    // Global Auth State
     let authState = {
       accessToken: localStorage.getItem('zt_access_token') || null,
       refreshToken: localStorage.getItem('zt_refresh_token') || null,
@@ -845,22 +725,14 @@
     function init() {
       if (authState.user && authState.accessToken) {
         setLoggedIn(authState.user, authState.accessToken, authState.refreshToken);
+        loadNilai();
       }
-      switchTab('demo');
-      selectDemoStep(1);
     }
 
     function fillPreset(username, deviceId) {
       document.getElementById('inpUsername').value = username;
       document.getElementById('inpPassword').value = 'password123';
       document.getElementById('inpDevice').value = deviceId;
-    }
-
-    async function quickLogin(username, deviceId) {
-      fillPreset(username, deviceId);
-      const fakeEvent = { preventDefault: () => {} };
-      await handleLogin(fakeEvent);
-      switchTab('nilai');
     }
 
     function setLoggedIn(user, token, refreshToken) {
@@ -875,7 +747,7 @@
       localStorage.setItem('zt_device_id', authState.deviceId);
 
       document.getElementById('statusDot').className = 'status-dot active';
-      document.getElementById('sessionLabel').innerHTML = `<strong>${user.nama}</strong> (${user.role})`;
+      document.getElementById('sessionLabel').innerHTML = '<strong>' + user.nama + '</strong> (' + user.role + ')';
       document.getElementById('btnLogout').style.display = 'inline-flex';
 
       try {
@@ -898,7 +770,7 @@
 
     function showAlert(boxId, message, type) {
       const box = document.getElementById(boxId);
-      box.className = `alert-box ${type}`;
+      box.className = 'alert-box ' + type;
       box.textContent = message;
       box.style.display = 'block';
       setTimeout(() => {
@@ -924,7 +796,7 @@
 
         const data = await res.json();
         if (!res.ok) {
-          showAlert('authAlert', `[DENY ${res.status}] ${data.error || data.reason}`, 'error');
+          showAlert('authAlert', '[DENY ' + res.status + '] ' + (data.error || data.reason), 'error');
           return;
         }
 
@@ -1009,12 +881,12 @@
         const data = await res.json();
 
         if (!res.ok) {
-          showAlert('actionAlert', `[DENY ${res.status}] ${data.reason || data.error}`, 'error');
-          tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: var(--danger); padding: 20px;">Akses Ditolak PEP: ${data.reason || data.error}</td></tr>`;
+          showAlert('actionAlert', '[DENY ' + res.status + '] ' + (data.reason || data.error), 'error');
+          tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; color: var(--danger); padding: 20px;">Akses Ditolak PEP: ' + (data.reason || data.error) + '</td></tr>';
           return;
         }
 
-        showAlert('actionAlert', `Data nilai berhasil dimuat (${data.total_items} data)`, 'success');
+        showAlert('actionAlert', 'Data nilai berhasil dimuat (' + data.total_items + ' data)', 'success');
         tbody.innerHTML = '';
 
         if (!data.data || data.data.length === 0) {
@@ -1027,20 +899,19 @@
           const isFinal = item.is_final === 1;
 
           const actionHtml = isDosen 
-            ? `<button class="btn btn-secondary btn-sm" ${isFinal ? 'disabled style="opacity:0.5;cursor:not-allowed;"' : ''} onclick="promptEditNilai(${item.id}, ${item.nilai_angka})">${isFinal ? 'Terkunci' : 'Edit Nilai'}</button>`
-            : `<span style="color: var(--text-muted); font-size: 11px;">Read-only</span>`;
+            ? '<button class="btn btn-secondary btn-sm" ' + (isFinal ? 'disabled style="opacity:0.4;cursor:not-allowed;"' : '') + ' onclick="promptEditNilai(' + item.id + ', ' + item.nilai_angka + ')">' + (isFinal ? 'Terkunci' : 'Edit') + '</button>'
+            : '<span style="color: var(--text-muted); font-size: 11px;">Read-only</span>';
 
           const tr = document.createElement('tr');
-          tr.innerHTML = `
-            <td>#${item.id}</td>
-            <td><strong>${item.kode_mk}</strong> - ${item.nama_mk}</td>
-            <td><code>${item.nim}</code></td>
-            <td>${item.nama_mahasiswa || authState.user.nama}</td>
-            <td><strong style="color: var(--brand-green);">${item.nilai_angka !== null ? item.nilai_angka : '-'}</strong></td>
-            <td><span class="badge ${item.nilai_huruf ? 'badge-allow' : ''}">${item.nilai_huruf || '-'}</span></td>
-            <td><span class="badge ${isFinal ? 'badge-final' : 'badge-draft'}">${isFinal ? 'FINAL' : 'DRAFT'}</span></td>
-            <td>${actionHtml}</td>
-          `;
+          tr.innerHTML = 
+            '<td>#' + item.id + '</td>' +
+            '<td><strong>' + item.kode_mk + '</strong> · ' + item.nama_mk + '</td>' +
+            '<td><code>' + item.nim + '</code></td>' +
+            '<td>' + (item.nama_mahasiswa || authState.user.nama) + '</td>' +
+            '<td><strong style="color: var(--accent);">' + (item.nilai_angka !== null ? item.nilai_angka : '-') + '</strong></td>' +
+            '<td><span class="badge ' + (item.nilai_huruf ? 'badge-allow' : '') + '">' + (item.nilai_huruf || '-') + '</span></td>' +
+            '<td><span class="badge ' + (isFinal ? 'badge-final' : 'badge-draft') + '">' + (isFinal ? 'FINAL' : 'DRAFT') + '</span></td>' +
+            '<td>' + actionHtml + '</td>';
           tbody.appendChild(tr);
         });
       } catch (err) {
@@ -1061,7 +932,7 @@
         const headers = getAuthHeaders();
         headers['Content-Type'] = 'application/json';
 
-        const res = await fetch(`/nilai/${id}`, {
+        const res = await fetch('/nilai/' + id, {
           method: 'PUT',
           headers: headers,
           body: JSON.stringify({ nilai_angka: val })
@@ -1069,11 +940,11 @@
         const data = await res.json();
 
         if (!res.ok) {
-          showAlert('actionAlert', `[DENY ${res.status}] ${data.reason || data.error}`, 'error');
+          showAlert('actionAlert', '[DENY ' + res.status + '] ' + (data.reason || data.error), 'error');
           return;
         }
 
-        showAlert('actionAlert', `Nilai ID #${id} berhasil diupdate menjadi ${val} (${data.data.nilai_huruf})`, 'success');
+        showAlert('actionAlert', 'Nilai ID #' + id + ' berhasil diupdate menjadi ' + val + ' (' + data.data.nilai_huruf + ')', 'success');
         loadNilai();
       } catch (err) {
         showAlert('actionAlert', 'Error: ' + err.message, 'error');
@@ -1081,21 +952,21 @@
     }
 
     async function finalisasiKelas(kelasId) {
-      if (!confirm(`Konfirmasi finalisasi Kelas ID #${kelasId}? Nilai akan dikunci permanen dan disinkronkan ke Service Transkrip.`)) return;
+      if (!confirm('Konfirmasi finalisasi Kelas ID #' + kelasId + '? Nilai akan dikunci permanen dan disinkronkan ke Service Transkrip.')) return;
 
       try {
-        const res = await fetch(`/kelas/${kelasId}/finalisasi`, {
+        const res = await fetch('/kelas/' + kelasId + '/finalisasi', {
           method: 'POST',
           headers: getAuthHeaders()
         });
         const data = await res.json();
 
         if (!res.ok) {
-          showAlert('actionAlert', `[DENY ${res.status}] ${data.reason || data.error}`, 'error');
+          showAlert('actionAlert', '[DENY ' + res.status + '] ' + (data.reason || data.error), 'error');
           return;
         }
 
-        showAlert('actionAlert', `Kelas #${kelasId} berhasil difinalisasi! ${data.items_synced} nilai tersinkron via token service.`, 'success');
+        showAlert('actionAlert', 'Kelas #' + kelasId + ' berhasil difinalisasi! ' + data.items_synced + ' nilai tersinkron via token service.', 'success');
         loadNilai();
       } catch (err) {
         showAlert('actionAlert', 'Error: ' + err.message, 'error');
@@ -1111,19 +982,19 @@
 
       const tbody = document.getElementById('tbodyTranskrip');
       try {
-        const res = await fetch(`/transkrip/${nim}`, {
+        const res = await fetch('/transkrip/' + nim, {
           headers: getAuthHeaders()
         });
         const data = await res.json();
 
         if (!res.ok) {
-          showAlert('actionAlert', `[DENY ${res.status}] ${data.reason || data.error}`, 'error');
-          tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: var(--danger); padding: 20px;">Akses Ditolak PEP: ${data.reason || data.error}</td></tr>`;
+          showAlert('actionAlert', '[DENY ' + res.status + '] ' + (data.reason || data.error), 'error');
+          tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: var(--danger); padding: 20px;">Akses Ditolak PEP: ' + (data.reason || data.error) + '</td></tr>';
           document.getElementById('transkripSummary').style.display = 'none';
           return;
         }
 
-        showAlert('actionAlert', `Transkrip untuk NIM ${nim} berhasil diambil`, 'success');
+        showAlert('actionAlert', 'Transkrip untuk NIM ' + nim + ' berhasil diambil', 'success');
         document.getElementById('transkripSummary').style.display = 'grid';
         document.getElementById('transkripSummary').style.gridTemplateColumns = 'repeat(4, 1fr)';
         document.getElementById('tsNim').textContent = data.nim;
@@ -1139,14 +1010,13 @@
 
         data.transkrip.forEach(t => {
           const tr = document.createElement('tr');
-          tr.innerHTML = `
-            <td><code>${t.kode_mk}</code></td>
-            <td>${t.nama_mk}</td>
-            <td>${t.sks}</td>
-            <td><strong>${t.nilai_angka}</strong></td>
-            <td><span class="badge badge-allow">${t.nilai_huruf}</span></td>
-            <td style="font-size: 11px; font-family: var(--font-mono); color: var(--text-muted);">${t.synced_at}</td>
-          `;
+          tr.innerHTML = 
+            '<td><code>' + t.kode_mk + '</code></td>' +
+            '<td>' + t.nama_mk + '</td>' +
+            '<td>' + t.sks + '</td>' +
+            '<td><strong>' + t.nilai_angka + '</strong></td>' +
+            '<td><span class="badge badge-allow">' + t.nilai_huruf + '</span></td>' +
+            '<td style="font-size: 11px; font-family: var(--font-mono); color: var(--text-muted);">' + t.synced_at + '</td>';
           tbody.appendChild(tr);
         });
       } catch (err) {
@@ -1163,7 +1033,7 @@
         const data = await res.json();
 
         if (!res.ok) {
-          tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: var(--danger); padding: 20px;">Akses Ditolak: ${data.error || 'Hanya Admin yang dapat melihat log audit.'}</td></tr>`;
+          tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: var(--danger); padding: 20px;">Akses Ditolak: ' + (data.error || 'Hanya Admin yang dapat melihat log audit.') + '</td></tr>';
           return;
         }
 
@@ -1176,18 +1046,17 @@
         data.logs.forEach(l => {
           const isAllow = l.decision === 'ALLOW';
           const tr = document.createElement('tr');
-          tr.innerHTML = `
-            <td style="font-size: 11px; font-family: var(--font-mono); color: var(--text-muted);">${l.timestamp}</td>
-            <td><span class="badge ${isAllow ? 'badge-allow' : 'badge-deny'}">${l.decision}</span></td>
-            <td><strong>${l.subject}</strong> <span style="font-size: 11px; color: var(--text-muted);">(${l.role})</span></td>
-            <td><code>${l.device_id || '-'}</code></td>
-            <td><code>${l.method} ${l.endpoint}</code></td>
-            <td style="font-size: 12px; color: ${isAllow ? 'var(--text-secondary)' : 'var(--danger)'};">${l.reason}</td>
-          `;
+          tr.innerHTML = 
+            '<td style="font-size: 11px; font-family: var(--font-mono); color: var(--text-muted);">' + l.timestamp + '</td>' +
+            '<td><span class="badge ' + (isAllow ? 'badge-allow' : 'badge-deny') + '">' + l.decision + '</span></td>' +
+            '<td><strong>' + l.subject + '</strong> <span style="font-size: 10px; color: var(--text-muted);">(' + l.role + ')</span></td>' +
+            '<td><code>' + (l.device_id || '-') + '</code></td>' +
+            '<td><code>' + l.endpoint + '</code></td>' +
+            '<td style="font-size: 11px; color: ' + (isAllow ? 'var(--text-secondary)' : 'var(--danger)') + ';">' + l.reason + '</td>';
           tbody.appendChild(tr);
         });
       } catch (err) {
-        tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: var(--danger); padding: 20px;">Error: ${err.message}</td></tr>`;
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: var(--danger); padding: 20px;">Error: ' + err.message + '</td></tr>';
       }
     }
 
@@ -1195,334 +1064,16 @@
       document.getElementById('tabNilai').className = 'tab-btn ' + (tab === 'nilai' ? 'active' : '');
       document.getElementById('tabTranskrip').className = 'tab-btn ' + (tab === 'transkrip' ? 'active' : '');
       document.getElementById('tabAudit').className = 'tab-btn ' + (tab === 'audit' ? 'active' : '');
-      document.getElementById('tabDemoMode').className = 'tab-btn ' + (tab === 'demo' ? 'active' : '');
 
       document.getElementById('viewNilai').style.display = tab === 'nilai' ? 'flex' : 'none';
       document.getElementById('viewTranskrip').style.display = tab === 'transkrip' ? 'flex' : 'none';
       document.getElementById('viewAudit').style.display = tab === 'audit' ? 'flex' : 'none';
-      document.getElementById('viewDemo').style.display = tab === 'demo' ? 'flex' : 'none';
 
       if (tab === 'nilai') loadNilai();
       if (tab === 'transkrip') loadTranskrip();
       if (tab === 'audit') loadAuditLogs();
     }
 
-    // Demo Scenarios Master Data
-    const demoSteps = [
-      {
-        num: 1,
-        req: 'Kebutuhan 4.1',
-        title: '1. Uji Penetrasi: Direct Access Bypass Port 3001 (Tanpa Gateway Secret)',
-        desc: 'Browser menembak langsung Service Nilai (port 3001) tanpa melewati Gateway PEP dan tanpa membawa X-Gateway-Secret.',
-        speech: '"Pengujian pertama adalah pencegahan bypass langsung ke Service Nilai di port 3001. Penyerang mencoba mengakses resource tanpa melewati Gateway PEP. Seperti yang terlihat pada hasil respon, statusnya HTTP 403 Forbidden karena tidak ada header rahasia X-Gateway-Secret. Hal ini memastikan bahwa seluruh lalu lintas wajib melewati API Gateway."'
-      },
-      {
-        num: 2,
-        req: 'Kebutuhan 4.1',
-        title: '2. Prinsip Assume Breach: Verifikasi Ulang Token di Resource Service',
-        desc: 'Browser mencoba mengirim X-Gateway-Secret ke port 3001 tetapi tanpa menyertakan JWT Bearer valid.',
-        speech: '"Pengujian kedua menerapkan prinsip Assume Breach. Jika penyerang berhasil memalsukan X-Gateway-Secret tetapi tidak membawa token JWT yang sah, hasilnya adalah HTTP 401 Unauthorized. Walaupun membawa gateway secret, Service Nilai memverifikasi ulang tanda tangan digital dan masa berlaku JWT secara independen."'
-      },
-      {
-        num: 3,
-        req: 'Kebutuhan 4.3',
-        title: '3. Verifikasi Konteks: Login Ditolak Jika Device ID Asing',
-        desc: 'Login mahasiswa Andi menggunakan header X-Device-ID: DEV-PENYUSUP-HP yang tidak terdaftar.',
-        speech: '"Pengujian ketiga adalah verifikasi konteks perangkat. Pada arsitektur Zero Trust, otentikasi tidak hanya memeriksa username dan password, tetapi juga identitas perangkat. Di sini kita mencoba login sebagai mahasiswa Andi dengan password yang benar, tetapi membawa Device ID asing. Responnya adalah HTTP 403 Forbidden karena perangkat tidak terdaftar di database."'
-      },
-      {
-        num: 4,
-        req: 'Kebutuhan 4.3',
-        title: '4. Verifikasi Konteks: Edit Nilai di Luar Jam Operasional (Pukul 23.00)',
-        desc: 'Dosen Budi mencoba mengubah nilai dengan simulasi jam akses 23:00 (batas operasional 07:00–21:00).',
-        speech: '"Pengujian keempat adalah verifikasi konteks jam operasional. Dokumen praktikum mensyaratkan perubahan nilai hanya boleh dilakukan pada pukul 07.00 sampai 21.00. Pada skenario ini, Dosen Budi mencoba mengubah nilai pada simulasi pukul 23.00 malam. Hasilnya adalah HTTP 403 Forbidden karena dicegat oleh Policy Engine."'
-      },
-      {
-        num: 5,
-        req: 'Kebutuhan 4.2',
-        title: '5. Kontrol Akses Data (ABAC): Dosen Lain Dilarang Ubah Nilai Kelas Budi',
-        desc: 'Dosen Siti mencoba mengubah nilai pada kelas IF301 yang diampu oleh Dr. Budi Santoso.',
-        speech: '"Pengujian kelima adalah kontrol akses berbasis kepemilikan data atau ABAC. Keputusan izin tidak hanya melihat peran dosen di token, melainkan Policy Engine membaca data pengampu di database. Di sini Dosen Siti mencoba mengedit nilai pada kelas IF301 milik Dr. Budi. Responnya adalah HTTP 403 Forbidden karena Siti bukan pengampu kelas tersebut."'
-      },
-      {
-        num: 6,
-        req: 'Kebutuhan 4.2',
-        title: '6. Privasi Mahasiswa: Mahasiswa Ditolak Mengintip Transkrip Orang Lain',
-        desc: 'Mahasiswa Andi (227006001) mencoba mengakses transkrip milik Rani (227006002).',
-        speech: '"Pengujian keenam adalah perlindungan privasi transkrip mahasiswa. Mahasiswa Andi dengan NIM 227006001 mencoba mengintip transkrip milik mahasiswa Rani. Hasilnya adalah HTTP 403 Forbidden. Policy Engine mencocokkan identifier subjek pada token dengan parameter NIM yang diminta, dan langsung memblokir request."'
-      },
-      {
-        num: 7,
-        req: 'Kebutuhan 3 & 4.1',
-        title: '7. Finalisasi Kelas & Komunikasi Antar-Service dengan Service Token',
-        desc: 'Dr. Budi memfinalisasi kelas -> status terkunci -> Service Nilai meminta Service Token 5m -> sinkron ke Service Transkrip.',
-        speech: '"Pengujian ketujuh adalah proses finalisasi nilai dan panggilan antar-service. Saat Dr. Budi memfinalisasi kelas, status nilai dikunci menjadi final. Service Nilai kemudian meminta Token Service khusus ke Gateway melalui POST /auth/service dengan role service dan masa berlaku 5 menit, lalu memanggil Service Transkrip. Hasilnya HTTP 200 OK."'
-      },
-      {
-        num: 8,
-        req: 'Kebutuhan 4.2',
-        title: '8. Proteksi Endpoint Sinkronisasi: Token User Biasa Ditolak Keras',
-        desc: 'Token pengguna (bahkan Admin) ditolak jika memanggil POST /transkrip/sinkron secara langsung.',
-        speech: '"Pengujian kedelapan membuktikan proteksi endpoint sinkronisasi. Sesuai ketentuan Tabel 3 dokumen tugas, endpoint POST /transkrip/sinkron hanya boleh diakses menggunakan token ber-role service. Jika pengguna biasa atau Admin mencoba memanggil endpoint ini, hasilnya adalah HTTP 403 Forbidden demi menjaga integritas data antar-service."'
-      }
-    ];
-
-    let currentDemoStep = 1;
-
-    function selectDemoStep(stepNum) {
-      currentDemoStep = stepNum;
-      for (let i = 1; i <= 8; i++) {
-        const pill = document.getElementById(`stepPill-${i}`);
-        if (pill) {
-          pill.className = 'tab-btn ' + (i === stepNum ? 'active' : '');
-        }
-      }
-      const s = demoSteps[stepNum - 1];
-      document.getElementById('activeReqBadge').textContent = s.req;
-      document.getElementById('activeTitle').textContent = s.title;
-      document.getElementById('activeDesc').textContent = s.desc;
-      document.getElementById('activeSpeech').textContent = s.speech;
-      document.getElementById('stepCounterLabel').textContent = `Skenario ${stepNum} / 8`;
-      document.getElementById('demoOutputBox').style.display = 'none';
-    }
-
-    function nextDemoScenario() {
-      if (currentDemoStep < 8) {
-        selectDemoStep(currentDemoStep + 1);
-      } else {
-        if (confirm('Semua 8 skenario demo telah selesai! Buka tab PEP Audit Logs untuk penutup video?')) {
-          switchTab('audit');
-        }
-      }
-    }
-
-    function runActiveScenario() {
-      runDemoScenario(currentDemoStep);
-    }
-
-    function copySpeechText() {
-      const text = document.getElementById('activeSpeech').textContent;
-      navigator.clipboard.writeText(text);
-      alert('Naskah berhasil disalin ke clipboard!');
-    }
-
-    // Interactive Demo Runner
-    async function runDemoScenario(scenNum) {
-      if (currentDemoStep !== scenNum) {
-        selectDemoStep(scenNum);
-      }
-      const outBox = document.getElementById('demoOutputBox');
-      const titleEl = document.getElementById('demoScenarioTitle');
-      const statusEl = document.getElementById('demoHttpStatus');
-      const actEl = document.getElementById('demoActionDesc');
-      const speechEl = document.getElementById('activeSpeech');
-      const rawEl = document.getElementById('demoRawResult');
-
-      outBox.style.display = 'block';
-      rawEl.textContent = 'Menjalankan skenario...';
-      outBox.scrollIntoView({ behavior: 'smooth' });
-
-      try {
-        if (scenNum === 1) {
-          titleEl.textContent = 'SKENARIO 1: Direct Access ke Port 3001 Ditolak (Bypass Gateway Prevention)';
-          actEl.textContent = 'Browser menembak langsung Service Nilai (http://localhost:3001/nilai) tanpa melewati Gateway PEP dan tanpa membawa X-Gateway-Secret.';
-          speechEl.textContent = 'Perhatikan: Sesuai Kebutuhan 4.1, Service Resource menolak request ini dengan status 403 Forbidden. Ini membuktikan service internal tidak dapat diakses langsung oleh penyerang dari luar.';
-          
-          const res = await fetch('http://localhost:3001/nilai');
-          const data = await res.json().catch(() => ({ status: res.status }));
-          statusEl.textContent = `HTTP ${res.status} FORBIDDEN`;
-          statusEl.className = 'badge badge-deny';
-          rawEl.textContent = JSON.stringify(data, null, 2);
-        }
-        else if (scenNum === 2) {
-          titleEl.textContent = 'SKENARIO 2: Prinsip Assume Breach (Service Verifikasi Ulang Token)';
-          actEl.textContent = 'Browser mencoba menyertakan X-Gateway-Secret ke port 3001 namun tanpa token Bearer JWT yang sah.';
-          speechEl.textContent = 'Perhatikan: Walaupun membawa gateway secret, Service Nilai tetap menolak dengan HTTP 401 Unauthorized karena setiap service memverifikasi ulang tanda tangan digital dan masa berlaku JWT secara independen.';
-          
-          const res = await fetch('http://localhost:3001/nilai', {
-            headers: { 'X-Gateway-Secret': 'super-secure-internal-gateway-secret-2026' }
-          });
-          const data = await res.json().catch(() => ({ status: res.status }));
-          statusEl.textContent = `HTTP ${res.status} UNAUTHORIZED`;
-          statusEl.className = 'badge badge-deny';
-          rawEl.textContent = JSON.stringify(data, null, 2);
-        }
-        else if (scenNum === 3) {
-          titleEl.textContent = 'SKENARIO 3: Verifikasi Konteks Device ID (Login Ditolak)';
-          actEl.textContent = 'Mengirim request login user mhs_andi dengan header X-Device-ID: DEV-PENYUSUP-HP.';
-          speechEl.textContent = 'Perhatikan: Meskipun username mhs_andi dan password benar, request ditolak HTTP 403 Forbidden karena Device ID tidak cocok dengan yang terdaftar di database untuk user tersebut.';
-
-          const res = await fetch('/auth/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'X-Device-ID': 'DEV-PENYUSUP-HP' },
-            body: JSON.stringify({ username: 'mhs_andi', password: 'password123' })
-          });
-          const data = await res.json();
-          statusEl.textContent = `HTTP ${res.status} FORBIDDEN`;
-          statusEl.className = 'badge badge-deny';
-          rawEl.textContent = JSON.stringify(data, null, 2);
-        }
-        else if (scenNum === 4) {
-          titleEl.textContent = 'SKENARIO 4: Verifikasi Konteks Jam Akses (Edit Nilai Jam 23:00 Ditolak)';
-          actEl.textContent = 'Login sebagai Dosen Budi, lalu mencoba edit nilai dengan simulasi header jam akses X-Mock-Hour: 23 (di luar batas 07:00 - 21:00).';
-          speechEl.textContent = 'Perhatikan: Sesuai Kebutuhan 4.3, operasi edit nilai dibatasi pukul 07.00 - 21.00. Permintaan di luar jam tersebut langsung dicegat oleh Policy Engine dengan HTTP 403.';
-
-          // 1. Login Budi dulu
-          const loginRes = await fetch('/auth/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'X-Device-ID': 'DEV-DOSEN-BUDI' },
-            body: JSON.stringify({ username: 'dosen_budi', password: 'password123' })
-          });
-          const loginData = await loginRes.json();
-          
-          // 2. Put nilai jam 23
-          const putRes = await fetch('/nilai/1', {
-            method: 'PUT',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer ' + loginData.access_token,
-              'X-Device-ID': 'DEV-DOSEN-BUDI',
-              'X-Mock-Hour': '23'
-            },
-            body: JSON.stringify({ nilai_angka: 95 })
-          });
-          const putData = await putRes.json();
-          statusEl.textContent = `HTTP ${putRes.status} FORBIDDEN`;
-          statusEl.className = 'badge badge-deny';
-          rawEl.textContent = JSON.stringify(putData, null, 2);
-        }
-        else if (scenNum === 5) {
-          titleEl.textContent = 'SKENARIO 5: Kontrol Akses Data (ABAC Dosen Ownership)';
-          actEl.textContent = 'Dosen Siti login, lalu mencoba mengubah nilai pada kelas IF301 (yang diampu oleh Dr. Budi Santoso).';
-          speechEl.textContent = 'Perhatikan: Dosen Siti ber-role Dosen, namun Policy Engine mengecek database bahwa kelas IF301 bukan milik Siti. Akses ditolak HTTP 403 Forbidden sesuai prinsip Least Privilege.';
-
-          // 1. Login Siti
-          const loginRes = await fetch('/auth/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'X-Device-ID': 'DEV-DOSEN-SITI' },
-            body: JSON.stringify({ username: 'dosen_siti', password: 'password123' })
-          });
-          const loginData = await loginRes.json();
-
-          // 2. Put nilai kelas budi
-          const putRes = await fetch('/nilai/1', {
-            method: 'PUT',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer ' + loginData.access_token,
-              'X-Device-ID': 'DEV-DOSEN-SITI',
-              'X-Mock-Hour': '10'
-            },
-            body: JSON.stringify({ nilai_angka: 95 })
-          });
-          const putData = await putRes.json();
-          statusEl.textContent = `HTTP ${putRes.status} FORBIDDEN`;
-          statusEl.className = 'badge badge-deny';
-          rawEl.textContent = JSON.stringify(putData, null, 2);
-        }
-        else if (scenNum === 6) {
-          titleEl.textContent = 'SKENARIO 6: Privasi Mahasiswa (Ditolak Melihat Transkrip Mahasiswa Lain)';
-          actEl.textContent = 'Mahasiswa Andi (NIM 227006001) mencoba mengakses transkrip Rani via GET /transkrip/227006002.';
-          speechEl.textContent = 'Perhatikan: Policy Engine memverifikasi identitas token subjek terhadap parameter NIM. Mahasiswa hanya diizinkan melihat transkrip miliknya sendiri. Akses ke NIM lain langsung diblokir 403.';
-
-          // 1. Login Andi
-          const loginRes = await fetch('/auth/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'X-Device-ID': 'DEV-MHS-ANDI' },
-            body: JSON.stringify({ username: 'mhs_andi', password: 'password123' })
-          });
-          const loginData = await loginRes.json();
-
-          // 2. Akses NIM Rani
-          const getRes = await fetch('/transkrip/227006002', {
-            headers: {
-              'Authorization': 'Bearer ' + loginData.access_token,
-              'X-Device-ID': 'DEV-MHS-ANDI'
-            }
-          });
-          const getData = await getRes.json();
-          statusEl.textContent = `HTTP ${getRes.status} FORBIDDEN`;
-          statusEl.className = 'badge badge-deny';
-          rawEl.textContent = JSON.stringify(getData, null, 2);
-        }
-        else if (scenNum === 7) {
-          titleEl.textContent = 'SKENARIO 7: Finalisasi Kelas & Panggilan Antar-Service dengan Service Token';
-          actEl.textContent = 'Dr. Budi memfinalisasi kelas IF301. Service Nilai mengunci nilai, meminta token service ke Gateway via POST /auth/service, lalu memanggil POST /transkrip/sinkron.';
-          speechEl.textContent = 'Perhatikan: Finalisasi berhasil 200 OK! Service Nilai tidak menembak langsung secara bebas, melainkan meminta token service (role: service) dan melewatinya melalui Gateway PEP.';
-
-          // 1. Login Budi
-          const loginRes = await fetch('/auth/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'X-Device-ID': 'DEV-DOSEN-BUDI' },
-            body: JSON.stringify({ username: 'dosen_budi', password: 'password123' })
-          });
-          const loginData = await loginRes.json();
-
-          // 2. Finalisasi
-          const finRes = await fetch('/kelas/1/finalisasi', {
-            method: 'POST',
-            headers: {
-              'Authorization': 'Bearer ' + loginData.access_token,
-              'X-Device-ID': 'DEV-DOSEN-BUDI',
-              'X-Mock-Hour': '10'
-            }
-          });
-          const finData = await finRes.json();
-          statusEl.textContent = `HTTP ${finRes.status} OK`;
-          statusEl.className = 'badge badge-allow';
-          rawEl.textContent = JSON.stringify(finData, null, 2);
-        }
-        else if (scenNum === 8) {
-          titleEl.textContent = 'SKENARIO 8: Proteksi Endpoint /transkrip/sinkron (Token User Ditolak)';
-          actEl.textContent = 'User (bahkan Admin) mencoba memanggil langsung POST /transkrip/sinkron dengan token user.';
-          speechEl.textContent = 'Perhatikan: Sesuai Tabel 3 dokumen tugas, endpoint /transkrip/sinkron hanya menerima token ber-role service. Token user mana pun ditolak 403 Forbidden.';
-
-          // 1. Login Admin
-          const loginRes = await fetch('/auth/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'X-Device-ID': 'DEV-ADMIN-01' },
-            body: JSON.stringify({ username: 'admin1', password: 'password123' })
-          });
-          const loginData = await loginRes.json();
-
-          // 2. Panggil sinkron pakai token admin
-          const syncRes = await fetch('/transkrip/sinkron', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer ' + loginData.access_token,
-              'X-Device-ID': 'DEV-ADMIN-01'
-            },
-            body: JSON.stringify({ kelas_id: 1, items: [] })
-          });
-          const syncData = await syncRes.json();
-          statusEl.textContent = `HTTP ${syncRes.status} FORBIDDEN`;
-          statusEl.className = 'badge badge-deny';
-          rawEl.textContent = JSON.stringify(syncData, null, 2);
-        }
-      } catch (err) {
-        statusEl.textContent = 'ERROR';
-        statusEl.className = 'badge badge-deny';
-        rawEl.textContent = 'Error: ' + err.message;
-      }
-    }
-
-    async function resetDatabaseDemo() {
-      if (!confirm('Reset database ke data awal?')) return;
-      try {
-        const res = await fetch('/seed-database', { method: 'POST' });
-        if (res.ok) {
-          alert('Database berhasil di-reset ke kondisi awal!');
-          loadNilai();
-        } else {
-          alert('Gagal reset database.');
-        }
-      } catch (e) {
-        alert('Gagal reset: ' + e.message);
-      }
-    }
-
-    // Initialize on load
     window.addEventListener('DOMContentLoaded', init);
   </script>
 </body>
