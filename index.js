@@ -37,5 +37,8 @@ function gracefulShutdown() {
     process.exit(0);
 }
 
+// Keep process alive indefinitely
+setInterval(() => {}, 1000 * 60 * 60);
+
 process.on('SIGINT', gracefulShutdown);
 process.on('SIGTERM', gracefulShutdown);

@@ -25,6 +25,15 @@ const GATEWAY_SECRET = process.env.GATEWAY_SECRET || 'super-secure-internal-gate
 // Global parser
 app.use(express.json());
 
+// Enable CORS
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', '*');
+    if (req.method === 'OPTIONS') return res.sendStatus(204);
+    next();
+});
+
 // ----------------------------------------------------
 // 1. Policy Administrator (PA) / Auth Endpoints (Port 3000)
 // ----------------------------------------------------

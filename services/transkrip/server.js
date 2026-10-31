@@ -10,6 +10,15 @@ const PORT = process.env.PORT_TRANSKRIP || 3002;
 
 app.use(express.json());
 
+// Enable CORS for browser-based testing of direct resource access
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', '*');
+    if (req.method === 'OPTIONS') return res.sendStatus(204);
+    next();
+});
+
 // Apply Zero Trust Verification to all incoming routes
 app.use(verifyZeroTrustResource);
 
